@@ -1,0 +1,2 @@
+class HipchatSearcher
+end
