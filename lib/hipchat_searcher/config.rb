@@ -1,11 +1,13 @@
 class HipchatSearcher
   class Config
+    attr_reader :token
     def initialize
       print_not_exist! if File.exist?(config_path)
-      @config = File.read(config_path)
+      @token = File.read(config_path).chomp
     end
 
     def valid?
+      !!@token
     end
 
     def print_not_exist
