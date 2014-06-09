@@ -6,5 +6,11 @@ describe HipchatSearcher::Result do
   end
 
   describe '#room_list' do
+    subject { result().room_list }
+    let(:response) { File.read('spec', 'data', 'room-list.json') }
+
+    it 'should return room names' do
+      should == []
+    end
   end
 end
