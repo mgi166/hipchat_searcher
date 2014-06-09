@@ -14,4 +14,7 @@ describe HipchatSearcher::Result do
       should == ["sample-1", "sample-2", "sample-3"]
     end
   end
+
+  describe '#message_list' do
+  end
 end
