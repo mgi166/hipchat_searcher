@@ -1,0 +1,23 @@
+{
+    "items"=>
+        [
+            {
+                "id"=>12345,
+                "links"=>{"self"=>"https://api.hipchat.com/v2/room/12345", "webhooks"=>"https://api.hipchat.com/v2/room/12345/webhook"},
+                "name"=>"sample-1"
+            },
+            {
+                "id"=>23456,
+                "links"=>{"self"=>"https://api.hipchat.com/v2/room/23456", "webhooks"=>"https://api.hipchat.com/v2/room/23456/webhook"},
+                "name"=>"sample-2"
+            },
+            {
+                "id"=>34567,
+                "links"=>{"self"=>"https://api.hipchat.com/v2/room/34567", "webhooks"=>"https://api.hipchat.com/v2/room/34567/webhook"},
+                "name"=>"sample-3"
+            }
+        ],
+    "links"=>{"self"=>"https://api.hipchat.com/v2/room"},
+    "maxResults"=>100,
+    "startIndex"=>0
+}
