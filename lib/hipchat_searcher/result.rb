@@ -1,3 +1,5 @@
+require 'json'
+
 class HipchatSearcher
   class Result
     def initialize(response)
@@ -5,6 +7,7 @@ class HipchatSearcher
     end
 
     def room_list
+      JSON.parse(@response)
     end
   end
 end
