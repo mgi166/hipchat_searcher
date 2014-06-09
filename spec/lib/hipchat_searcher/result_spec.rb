@@ -7,10 +7,11 @@ describe HipchatSearcher::Result do
 
   describe '#room_list' do
     subject { result(response).room_list }
-    let(:response) { File.read('spec', 'data', 'room-list.json') }
+    let(:response) { eval File.read(path) }
+    let(:path)     { File.join('spec', 'data', 'room-list.json') }
 
     it 'should return room names' do
-      should == []
+      should == ["sample-1", "sample-2", "sample-3"]
     end
   end
 end

@@ -1,5 +1,3 @@
-require 'json'
-
 class HipchatSearcher
   class Result
     def initialize(response)
@@ -7,7 +5,7 @@ class HipchatSearcher
     end
 
     def room_list
-      JSON.parse(@response)
+      @response['items'].map { |item| item['name'] }
     end
   end
 end
