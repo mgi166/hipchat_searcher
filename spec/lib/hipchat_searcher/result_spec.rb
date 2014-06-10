@@ -5,6 +5,62 @@ describe HipchatSearcher::Result do
     described_class.new(response)
   end
 
+  describe '#new' do
+    describe 'given valid response(a json like string)' do
+      subject { result(response) }
+
+      let(:response) { '{"google":"value1", "twitter":"value2"}' }
+
+      it { should be_instance_of HipchatSearcher::Result }
+    end
+
+    describe 'given valid response(hash has key "items")' do
+      subject { result(response) }
+
+      let(:response) do
+        {'items' => ['a', 'b', 'c'], 'links'=>'http://sample.co.jp', 'maxResult'=>100, 'startIndex'=>0}
+      end
+
+      it { should be_instance_of HipchatSearcher::Result }
+    end
+
+    describe 'given empty string as response' do
+      subject { result(response) }
+
+      let(:response) { '' }
+
+      it 'should raise error' do
+        expect do
+          subject
+        end.to raise_error(HipchatSearcher::Result::InvalidResponse)
+      end
+    end
+
+    describe 'given a hash without "items" key as response' do
+      subject { result(response) }
+
+      let(:response) { {} }
+
+      it 'should raise error' do
+        expect do
+          subject
+        end.to raise_error(HipchatSearcher::Result::InvalidResponse)
+      end
+    end
+
+    describe 'given other object as response' do
+      subject { result(response) }
+
+      let(:response) { nil }
+
+      it 'should raise error' do
+        expect do
+          subject
+        end.to raise_error(HipchatSearcher::Result::InvalidResponse)
+      end
+    end
+  end
+
   describe '#room_list' do
     subject { result(response).room_list }
 

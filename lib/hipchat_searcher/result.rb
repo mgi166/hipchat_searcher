@@ -6,6 +6,7 @@ class HipchatSearcher
 
     def initialize(response)
       @response = response
+      valid!
     end
 
     def room_list
@@ -17,8 +18,17 @@ class HipchatSearcher
     end
 
     def valid!
-      if @response.to_s.empty? || !@response.has_key?('items')
-        raise InvalidResponse, "`#{@response}' is invalid response as hipchat"
+      case @response
+      when String
+        if @response.empty?
+          raise InvalidResponse, "`#{@response}' is invalid response as hipchat. expect String size is over than 0"
+        end
+      when Hash
+        if !@response.has_key?('items')
+          raise InvalidResponse, "`#{@response}' is invalid response as hipchat. expect Hash key has 'items'"
+        end
+      else
+        raise InvalidResponse, "`#{@response}' is invalid response as hipchat. expect String or Hash"
       end
     end
   end
