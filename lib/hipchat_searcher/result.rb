@@ -11,6 +11,7 @@ class HipchatSearcher
     end
 
     def message_list
+      JSON.parse(@response)['items'].map{|i| i['message']}
     end
   end
 end
