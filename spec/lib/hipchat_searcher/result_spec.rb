@@ -67,6 +67,8 @@ describe HipchatSearcher::Result do
     let(:response) { eval File.read(path) }
     let(:path)     { File.join('spec', 'data', 'room-list.txt') }
 
+    it { should be_instance_of Array }
+
     it 'should return room names' do
       should == ["sample-1", "sample-2", "sample-3"]
     end
@@ -77,6 +79,8 @@ describe HipchatSearcher::Result do
 
     let(:response) { File.read(path) }
     let(:path)     { File.join('spec', 'data', 'message_list.json') }
+
+    it { should be_instance_of Array }
 
     it 'should be return messages' do
       should == ["yareyare daze", "rerorero", "a... arinomama ima okotta koto wo hanasu ze"]
