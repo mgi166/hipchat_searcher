@@ -74,15 +74,15 @@ describe HipchatSearcher::Result do
     end
   end
 
-  describe '#message_list' do
-    subject { result(response).message_list }
+  describe '#messages' do
+    subject { result(response).messages }
 
     let(:response) { File.read(path) }
     let(:path)     { File.join('spec', 'data', 'message_list.json') }
 
     it { should be_instance_of Array }
 
-    it 'should be return messages' do
+    it 'should return messages' do
       should == ["yareyare daze", "rerorero", "a... arinomama ima okotta koto wo hanasu ze"]
     end
   end

@@ -4,17 +4,19 @@ class HipchatSearcher
   class Result
     class InvalidResponse < StandardError; end
 
+    attr_accessor :room
+
     def initialize(response)
       @response = response
       valid!
     end
 
     def room_list
-      @response['items'].map { |item| item['name'] }
+      @response['items'].map {|i| i['name'] }
     end
 
-    def message_list
-      JSON.parse(@response)['items'].map{|i| i['message']}
+    def messages
+      @messages = JSON.parse(@response)['items'].map {|i| i['message']}
     end
 
     def valid!
