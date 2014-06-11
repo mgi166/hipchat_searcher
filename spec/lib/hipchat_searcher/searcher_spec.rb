@@ -11,7 +11,6 @@ describe HipchatSearcher::Searcher do
     let(:pattern) { 'abc' }
 
     it 'description' do
-      p subject
     end
   end
 end
