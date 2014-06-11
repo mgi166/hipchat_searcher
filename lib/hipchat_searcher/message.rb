@@ -2,15 +2,14 @@ require 'hipchat'
 
 class HipchatSearcher
   class Message
-    def initialize(token, room, options={})
+    def initialize(token, options={})
       @token   = token
-      @room    = room
       @options = options
       @client  = ::HipChat::Client.new(@token, api_version: 'v2')
     end
 
-    def get_messages
-      @client[@room].history(@options)
+    def get_messages(room)
+      @client[room].history(@options)
     end
   end
 end
