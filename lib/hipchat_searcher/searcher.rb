@@ -6,7 +6,7 @@ class HipchatSearcher
 
     def search(pattern)
       pattern = Regexp.new(pattern)
-      @result.grep(pattern)
+      @result.messages.grep(pattern)
     end
   end
 end
