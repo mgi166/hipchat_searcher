@@ -2,7 +2,7 @@ class HipchatSearcher
   class Config
     attr_reader :token
     def initialize
-      print_not_exist! if File.exist?(config_path)
+      print_not_exist! unless File.exist?(config_path)
       @token = File.read(config_path).chomp
     end
 
@@ -15,7 +15,7 @@ class HipchatSearcher
 Config file is not exsited.
 
 * To create config file, run this command
-`echo {auth_token} > .hps`
+`echo {auth_token} > ~/.hps`
 
 * To get new auth_token, visit and sign in.
 https://www.hipchat.com/
