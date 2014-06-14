@@ -11,7 +11,7 @@ class HipchatSearcher
       valid!
     end
 
-    def parse_room_name
+    def room_names
       @response['items'].map {|i| i['name'] }
     end
 
