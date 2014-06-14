@@ -61,8 +61,8 @@ describe HipchatSearcher::Result do
     end
   end
 
-  describe '#room_list' do
-    subject { result(response).room_list }
+  describe '#room_names' do
+    subject { result(response).room_names }
 
     let(:response) { eval File.read(path) }
     let(:path)     { File.join('spec', 'data', 'room-list.txt') }
