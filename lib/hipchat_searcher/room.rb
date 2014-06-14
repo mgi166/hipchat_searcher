@@ -31,5 +31,10 @@ class HipchatSearcher
         raise ::HipChat::UnknownResponseCode, "Unexpected #{response.code} for room"
       end
     end
+
+    def names
+      result = Result.new(get_all_room)
+      result.room_list
+    end
   end
 end
