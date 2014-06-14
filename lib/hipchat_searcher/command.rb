@@ -1,8 +1,8 @@
 class HipchatSearcher
   class Command
-    def initialize
+    def initialize(options)
+      @options = options
       @config  = Config.new
-      @options = Options.new
     end
 
     def run
