@@ -1,3 +1,4 @@
+require 'hipchat_searcher/command'
 require 'hipchat_searcher/config'
 require 'hipchat_searcher/message'
 require 'hipchat_searcher/options'
