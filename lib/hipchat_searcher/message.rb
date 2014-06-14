@@ -8,7 +8,7 @@ class HipchatSearcher
       @client  = ::HipChat::Client.new(@token, api_version: 'v2')
     end
 
-    def get_messages(room)
+    def get_history(room)
       @client[room].history(@options)
     end
   end
