@@ -14,8 +14,7 @@ class HipchatSearcher
 
     def histroy(room)
       h = get_history(room)
-      result = Result.new(h)
-      result.messages
+      Result.new(h).tap {|r| r.room = room }
     end
   end
 end
