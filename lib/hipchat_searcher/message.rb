@@ -11,5 +11,11 @@ class HipchatSearcher
     def get_history(room)
       @client[room].history(@options)
     end
+
+    def histroy(room)
+      h = get_history(room)
+      result = Result.new(h)
+      result.messages
+    end
   end
 end
