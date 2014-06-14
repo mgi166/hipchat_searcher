@@ -23,4 +23,27 @@ describe HipchatSearcher::Options do
       it { should be_falsey }
     end
   end
+
+  describe '#user?' do
+    context 'given hash has a "user" key as argument' do
+      subject { described_class.new(hash).user? }
+      let(:hash) { {'user' => 'jotaro kujo' } }
+
+      it { should be_truthy }
+    end
+
+    context 'given hash has a "u" key as argument' do
+      subject { described_class.new(hash).user? }
+      let(:hash) { {'u' => 'jojo' } }
+
+      it { should be_truthy }
+    end
+
+    context 'given hash have any other keys as argument' do
+      subject { described_class.new(hash).user? }
+      let(:hash) { {'other' => 'xxxx' } }
+
+      it { should be_falsey }
+    end
+  end
 end

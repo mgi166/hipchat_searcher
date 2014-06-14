@@ -5,5 +5,9 @@ class HipchatSearcher
     def room?
       !!self['r'] || !!self['room']
     end
+
+    def user?
+      !!self['u'] || !!self['user']
+    end
   end
 end
