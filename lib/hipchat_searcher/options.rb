@@ -9,5 +9,9 @@ class HipchatSearcher
     def user?
       !!self['u'] || !!self['user']
     end
+
+    def from?
+      !!self['f'] || !!self['from']
+    end
   end
 end
