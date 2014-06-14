@@ -1,6 +1,7 @@
 class HipchatSearcher
   class Command
-    def initialize(options)
+    def initialize(pattern, options)
+      @pattern = pattern
       @options = options
       @config  = Config.new
     end
@@ -17,7 +18,7 @@ class HipchatSearcher
 
       rooms.inject([]) do |result, room|
         hist = message.history(room)
-        Searcher.search(pattern, hist)
+        Searcher.search(@pattern, hist)
       end
     end
   end

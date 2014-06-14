@@ -3,7 +3,8 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'hipchat_searcher'
 require 'optparse'
 
+pattern = ARGV[0]
 hash = ARGV.getopts(HipchatSearcher::Options.short_names, HipchatSearcher::Options.long_names)
 options = HipchatSearcher::Options.new(hash)
-command = HipchatSearcher::Command.new(options)
+command = HipchatSearcher::Command.new(pattern, options)
 command.run
