@@ -15,6 +15,14 @@ class HipchatSearcher
     end
 
     class << self
+      def short_names
+        'fhruABC'
+      end
+
+      def long_names
+        ['room' 'user', 'from', 'help']
+      end
+
       def room
         self['r'] || self['room']
       end
