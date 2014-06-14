@@ -1,2 +1,9 @@
 #!/usr/bin/env ruby
-require 'hipchat'
+$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
+require 'hipchat_searcher'
+require 'optparse'
+
+hash = ARGV.getopts(HipchatSearcher::Options.short_names, HipchatSearcher::Options.long_names)
+options = HipchatSearcher::Options.new(hash)
+command = HipchatSearcher::Command.new(options)
+command.run
