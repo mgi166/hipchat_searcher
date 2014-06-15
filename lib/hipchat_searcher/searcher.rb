@@ -2,12 +2,13 @@ require 'colorize'
 
 class HipchatSearcher
   class Searcher
-    def initialize(result)
-      @result = result
+    def initialize(result, options={})
+      @result  = result
+      @options = options
     end
 
-    def self.search(pattern, result)
-      new(result).search(pattern)
+    def self.search(pattern, result, options)
+      new(result, options).search(pattern)
     end
 
     def search(pattern)
