@@ -10,11 +10,11 @@ class HipchatSearcher
       rooms = if @options.room?
                 @options.room
               else
-                room = Room.new(@config.token, @options.option)
+                room = Room.new(@config.token, @options)
                 room.names
               end
 
-      message  = Message.new(@config.token, @options.option)
+      message  = Message.new(@config.token, @options)
 
       rooms.inject([]) do |result, room|
         hist = message.history(room)

@@ -47,23 +47,23 @@ describe HipchatSearcher::Options do
     end
   end
 
-  describe '#from?' do
-    context 'given hash has a "from" key as argument' do
-      subject { described_class.new(hash).from? }
-      let(:hash) { {'from' => '2014-06-1' } }
+  describe '#date?' do
+    context 'given hash has a "date" key as argument' do
+      subject { described_class.new(hash).date? }
+      let(:hash) { {'date' => '2014-06-1' } }
 
       it { should be_truthy }
     end
 
     context 'given hash has a "u" key as argument' do
-      subject { described_class.new(hash).from? }
-      let(:hash) { {'f' => '2014-06-1' } }
+      subject { described_class.new(hash).date? }
+      let(:hash) { {'d' => '2014-06-1' } }
 
       it { should be_truthy }
     end
 
     context 'given hash have any other keys as argument' do
-      subject { described_class.new(hash).from? }
+      subject { described_class.new(hash).date? }
       let(:hash) { {'other' => 'xxxx' } }
 
       it { should be_falsey }

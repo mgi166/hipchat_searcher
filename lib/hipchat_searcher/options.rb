@@ -10,8 +10,8 @@ class HipchatSearcher
       !!self['u'] || !!self['user']
     end
 
-    def from?
-      !!self['f'] || !!self['from']
+    def date?
+      !!self['d'] || !!self['date']
     end
 
     class << self
@@ -31,8 +31,8 @@ class HipchatSearcher
         self['u'] || self['user']
       end
 
-      def from
-        self['f'] || self['from']
+      def date
+        self['d'] || self['date']
       end
     end
   end
