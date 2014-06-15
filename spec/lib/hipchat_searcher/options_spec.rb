@@ -1,6 +1,46 @@
 require 'spec_helper'
 
 describe HipchatSearcher::Options do
+  describe '#message_options' do
+    context 'when self has "archived" key' do
+      subject { described_class.new(hash).message_options }
+      let(:hash) { {'d' => '2014-06-01' } }
+
+      it 'should return hash include key "include-archived"' do
+        should == { 'date' => '2014-06-01' }
+      end
+    end
+
+    context "when self don't have 'archived' key" do
+      subject { described_class.new(hash).message_options }
+      let(:hash) { {'room' => 'room-name' } }
+
+      it 'should return empty hash' do
+        should be_empty
+      end
+    end
+  end
+
+  describe '#room_options' do
+    context 'when self has "archived" key' do
+      subject { described_class.new(hash).room_options }
+      let(:hash) { {'archived' => true } }
+
+      it 'should return hash include key "include-archived"' do
+        should == {"include-archived" => true}
+      end
+    end
+
+    context "when self don't have 'archived' key" do
+      subject { described_class.new(hash).room_options }
+      let(:hash) { {'d' => '2014-06-01' } }
+
+      it 'should return empty hash' do
+        should be_empty
+      end
+    end
+  end
+
   describe '#room?' do
     context 'given hash has a "room" key as argument' do
       subject { described_class.new(hash).room? }
