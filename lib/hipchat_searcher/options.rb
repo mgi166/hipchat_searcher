@@ -42,6 +42,10 @@ class HipchatSearcher
       !!self['u'] || !!self['user']
     end
 
+    def search_options
+      user? ? { 'user' => user } : {}
+    end
+
     class << self
       def short_names
         'fhruABC'

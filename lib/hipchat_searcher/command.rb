@@ -10,15 +10,15 @@ class HipchatSearcher
       rooms = if @options.room?
                 @options.room
               else
-                room = Room.new(@config.token, @options)
+                room = Room.new(@config.token, @options.room_options)
                 room.names
               end
 
-      message  = Message.new(@config.token, @options)
+      message  = Message.new(@config.token, @options.message_options)
 
       rooms.inject([]) do |result, room|
         hist = message.history(room)
-        Searcher.search(@pattern, hist)
+        Searcher.search(@pattern, hist, @options.search_options)
       end
     end
   end
