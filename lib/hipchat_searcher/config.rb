@@ -10,7 +10,7 @@ class HipchatSearcher
       !!@token
     end
 
-    def print_not_exist
+    def print_not_exist!
       puts <<-EOS
 Config file is not exsited.
 
@@ -20,15 +20,12 @@ Config file is not exsited.
 * To get new auth_token, visit and sign in.
 https://www.hipchat.com/
       EOS
-    end
 
-    def print_not_exist!
-      print_not_exist
       exit 1
     end
 
     def config_path
-      File.expand_path(File.join('.', '.hps'))
+      File.expand_path(File.join('~', '.hps'))
     end
   end
 end
