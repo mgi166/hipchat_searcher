@@ -15,7 +15,8 @@ class HipchatSearcher
       pattern = Regexp.new(pattern)
 
       @result.items.each do |item|
-        item.message.match(pattern) do |matchdata|
+        if pattern =~ item.message
+          puts display(pattern, item.message)
         end
       end
 
