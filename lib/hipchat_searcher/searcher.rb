@@ -14,8 +14,9 @@ class HipchatSearcher
     def search(pattern)
       pattern = Regexp.new(pattern)
 
-      @result.messages.grep(pattern) do |matched|
-        puts display(pattern, matched)
+      @result.items.each do |item|
+        item.message.match(pattern) do |matchdata|
+        end
       end
 
       nil
