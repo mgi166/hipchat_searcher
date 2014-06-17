@@ -74,29 +74,29 @@ describe HipchatSearcher::Result do
     end
   end
 
-  describe '#messages' do
+  describe '#items' do
     context 'the value' do
-      subject { result(response).messages }
+      subject { result(response).items }
 
       let(:response) { File.read(path) }
-      let(:path)     { File.join('spec', 'data', 'message_list.json') }
+      let(:path)     { File.join('spec', 'data', 'item_list.json') }
 
       it { should be_instance_of Array }
     end
 
-    describe 'the message elements' do
-      let(:message_element) { result(response).messages.first }
+    describe 'the item elements' do
+      let(:item_element) { result(response).items.first }
       let(:response) { File.read(path) }
-      let(:path)     { File.join('spec', 'data', 'message_list.json') }
+      let(:path)     { File.join('spec', 'data', 'item_list.json') }
 
       context 'class' do
-        subject { message_element }
+        subject { item_element }
 
         it { should be_instance_of Hashie::Mash }
       end
 
       context '#date' do
-        subject { message_element.date }
+        subject { item_element.date }
 
         it 'should return the value of "date"' do
           should == '2014-05-30T01:38:16.741565+00:00'
@@ -104,13 +104,13 @@ describe HipchatSearcher::Result do
       end
 
       context '#from' do
-        subject { message_element.from }
+        subject { item_element.from }
 
         it { should be_instance_of Hashie::Mash }
       end
 
       context '#id' do
-        subject { message_element.id }
+        subject { item_element.id }
 
         it 'should return the value of "id"' do
           should == 'aaaa-bbbb-cccc'
@@ -118,15 +118,15 @@ describe HipchatSearcher::Result do
       end
 
       context '#mentions' do
-        subject { message_element.mentions }
+        subject { item_element.mentions }
 
         it 'should return the value of "mention" ' do
           should == []
         end
       end
 
-      context '#message' do
-        subject { message_element.message }
+      context '#item' do
+        subject { item_element.message }
 
         it 'should return the value of "message"' do
           should == 'yareyare daze'
