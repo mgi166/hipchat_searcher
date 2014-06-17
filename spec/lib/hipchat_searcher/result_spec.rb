@@ -75,15 +75,63 @@ describe HipchatSearcher::Result do
   end
 
   describe '#messages' do
-    subject { result(response).messages }
+    context 'the value' do
+      subject { result(response).messages }
 
-    let(:response) { File.read(path) }
-    let(:path)     { File.join('spec', 'data', 'message_list.json') }
+      let(:response) { File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'message_list.json') }
 
-    it { should be_instance_of Array }
+      it { should be_instance_of Array }
+    end
 
-    it 'should return messages' do
-      should == ["yareyare daze", "rerorero", "a... arinomama ima okotta koto wo hanasu ze"]
+    describe 'the message elements' do
+      let(:message_element) { result(response).messages.first }
+      let(:response) { File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'message_list.json') }
+
+      context 'class' do
+        subject { message_element }
+
+        it { should be_instance_of Hashie::Mash }
+      end
+
+      context '#date' do
+        subject { message_element.date }
+
+        it 'should return the value of "date"' do
+          should == '2014-05-30T01:38:16.741565+00:00'
+        end
+      end
+
+      context '#from' do
+        subject { message_element.from }
+
+        it { should be_instance_of Hashie::Mash }
+      end
+
+      context '#id' do
+        subject { message_element.id }
+
+        it 'should return the value of "id"' do
+          should == 'aaaa-bbbb-cccc'
+        end
+      end
+
+      context '#mentions' do
+        subject { message_element.mentions }
+
+        it 'should return the value of "mention" ' do
+          should == []
+        end
+      end
+
+      context '#message' do
+        subject { message_element.message }
+
+        it 'should return the value of "message"' do
+          should == 'yareyare daze'
+        end
+      end
     end
   end
 end

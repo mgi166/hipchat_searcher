@@ -16,7 +16,7 @@ class HipchatSearcher
     end
 
     def messages
-      @messages = JSON.parse(@response)['items'].map {|i| i['message']}
+      @messages = JSON.parse(@response)['items'].map {|i| ::Hashie::Mash.new(i) }
     end
 
     def valid!
