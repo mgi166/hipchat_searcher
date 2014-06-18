@@ -79,7 +79,7 @@ describe HipchatSearcher::Result do
       subject { result(response).items }
 
       let(:response) { File.read(path) }
-      let(:path)     { File.join('spec', 'data', 'item_list.json') }
+      let(:path)     { File.join('spec', 'data', 'item-list.json') }
 
       it { should be_instance_of Array }
     end
@@ -87,7 +87,7 @@ describe HipchatSearcher::Result do
     describe 'the item elements' do
       let(:item_element) { result(response).items.first }
       let(:response) { File.read(path) }
-      let(:path)     { File.join('spec', 'data', 'item_list.json') }
+      let(:path)     { File.join('spec', 'data', 'item-list.json') }
 
       context 'class' do
         subject { item_element }

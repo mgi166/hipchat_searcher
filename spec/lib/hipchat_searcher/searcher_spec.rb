@@ -10,7 +10,7 @@ describe HipchatSearcher::Searcher do
       subject { searcher(result).search(pattern) }
 
       let(:pattern)  { 'yare' }
-      let(:response) { File.read(File.join('spec', 'data', 'item_list.json')) }
+      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
       let(:result) do
         r = HipchatSearcher::Result.new(response)
         r.room = "Joestars"
@@ -34,7 +34,7 @@ describe HipchatSearcher::Searcher do
       subject { searcher(result).search(pattern) }
 
       let(:pattern)  { 'ze' }
-      let(:response) { File.read(File.join('spec', 'data', 'item_list.json')) }
+      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
       let(:result) do
         r = HipchatSearcher::Result.new(response)
         r.room = "Joestars"
@@ -62,7 +62,7 @@ describe HipchatSearcher::Searcher do
 
       let(:pattern)  { 'abcd' }
       let(:result)   { HipchatSearcher::Result.new(response) }
-      let(:response) { File.read(File.join('spec', 'data', 'item_list.json')) }
+      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
 
       it { should be_nil }
 
@@ -78,7 +78,7 @@ describe HipchatSearcher::Searcher do
 
       let(:pattern)  { nil }
       let(:result)   { HipchatSearcher::Result.new(response) }
-      let(:response) { File.read(File.join('spec', 'data', 'item_list.json')) }
+      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
 
       it 'should raise exception' do
         expect do
@@ -93,7 +93,7 @@ describe HipchatSearcher::Searcher do
 
     let(:pattern) { Regexp.new('yare') }
     let(:item) do
-      src  = File.read(File.join('spec', 'data', 'item_list.json'))
+      src  = File.read(File.join('spec', 'data', 'item-list.json'))
       hash = JSON.parse(src)
       ::Hashie::Mash.new(hash).items.first
     end
