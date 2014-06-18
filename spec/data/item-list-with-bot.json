@@ -1,0 +1,58 @@
+{
+    "items": [
+        {
+            "color": null,
+            "date": "2014-06-17T08:14:48.305590+00:00",
+            "from": "GitHub",
+            "id": "ae1140b3-be80-4bbd-9e97-a61c77185d02",
+            "mentions": [],
+            "message": "<a href=\"https://github.com/kasei-san\">mgi166</a> commented on <a href=\"https://github.com/mgi166/hipchat-searcher/pull/118#issuecomment-46279110\">pull request 118</a> of <a href=\"https://github.com/mgi166/hipchat-searcher\">mgi166/hipchat-searcher</a>: ...",
+            "message_format": "html"
+        },
+        {
+            "color": "green",
+            "date": "2014-06-17T08:15:12.787725+00:00",
+            "from": "Jenkins",
+            "id": "0955d2a9-98c8-4ecf-ade6-140d201dad11",
+            "mentions": [],
+            "message": "hipchat-searcher - #12 Success after 7 \u5206 17 \u79d2 (<a href=\"http://192.168.1.1:8080/job/hipchat-searcher-feature/12/\">Open</a>)",
+            "message_format": "html"
+        },
+        {
+            "date": "2014-06-17T08:33:52.311338+00:00",
+            "from": {
+                "id": 12345,
+                "links": {"self": "https://api.hipchat.com/v2/user/710659"},
+                "mention_name": "light",
+                "name": "light yagami"
+            },
+            "id": "2f1c99c2-c49d-4be1-b8d0-9c6c50557385",
+            "mentions": [
+                {
+                    "id": 23456,
+                    "links": {"self": "https://api.hipchat.com/v2/user/710653"},
+                    "mention_name": "ray",
+                    "name": "ray penber"
+                }
+            ],
+            "message": "good bye ray penber @ray "
+        },
+        {
+            "date": "2014-06-17T08:35:12.094892+00:00",
+            "from": {
+                "id": 23456,
+                "links": {"self": "https://api.hipchat.com/v2/user/710653"},
+                "mention_name": "ray",
+                "name": "ray penber"
+            },
+            "id": "abe58437-977c-49fb-bd9b-2d8016356983",
+            "mentions": [],
+            "message": "(beer)"
+        },
+    ],
+    "links": {
+        "self": "https://api.hipchat.com/v2/room/death-note/history"
+    },
+    "maxResults": 100,
+    "startIndex": 0
+}
