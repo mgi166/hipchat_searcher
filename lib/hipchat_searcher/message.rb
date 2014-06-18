@@ -12,7 +12,7 @@ class HipchatSearcher
       @client[room].history(@options)
     end
 
-    def histroy(room)
+    def history(room)
       h = get_history(room)
       Result.new(h).tap {|r| r.room = room }
     end
