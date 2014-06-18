@@ -8,7 +8,7 @@ class HipchatSearcher
 
     def run
       rooms = if @options.room?
-                @options.room
+                [@options.room]
               else
                 room = Room.new(@config.token, @options.room_options)
                 room.names

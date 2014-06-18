@@ -48,7 +48,7 @@ class HipchatSearcher
 
     class << self
       def short_names
-        'fhru'
+        'f:h:r:u'
       end
 
       def long_names
