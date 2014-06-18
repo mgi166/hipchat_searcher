@@ -41,7 +41,8 @@ class HipchatSearcher
       end
 
       date = "  Date: #{item.date}"
-      msg  = "  @#{item.from.mention_name}" + ': ' + msg
+      name = item.from.mention_name rescue item.from
+      msg  = "  @#{name}" + ': ' + msg
       puts "%s\n%s" % [date, msg]
     end
   end

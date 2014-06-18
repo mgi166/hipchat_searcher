@@ -89,24 +89,48 @@ describe HipchatSearcher::Searcher do
   end
 
   describe '#puts_search_result' do
-    subject { searcher(double(:result)).puts_search_result(pattern, item) }
+    context 'when only person in room' do
+      subject { searcher(double(:result)).puts_search_result(pattern, item) }
 
-    let(:pattern) { Regexp.new('yare') }
-    let(:item) do
-      src  = File.read(File.join('spec', 'data', 'item-list.json'))
-      hash = JSON.parse(src)
-      ::Hashie::Mash.new(hash).items.first
+      let(:pattern) { Regexp.new('yare') }
+      let(:item) do
+        src  = File.read(File.join('spec', 'data', 'item-list.json'))
+        hash = JSON.parse(src)
+        ::Hashie::Mash.new(hash).items.first
+      end
+
+      let(:search_result) do
+        "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
+        "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n"
+      end
+
+      it 'should print string of search result' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
+      end
     end
 
-    let(:search_result) do
-      "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-      "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n"
-    end
+    context 'when person and bot in room' do
+      subject { searcher(double(:result)).puts_search_result(pattern, item) }
 
-    it 'should print string of search result' do
-      expect do
-        subject
-      end.to output(search_result).to_stdout
+      let(:pattern) { Regexp.new('mgi166') }
+      let(:item) do
+        src  = File.read(File.join('spec', 'data', 'item-list-with-bot.json'))
+        hash = JSON.parse(src)
+        ::Hashie::Mash.new(hash).items.first
+      end
+
+      let(:search_result) do
+        '  Date: 2014-06-17T08:14:48.305590+00:00' + "\n" + \
+        "  @GitHub: \e[4;39;49mmgi166\e[0m commented on pull request 118 ..." + "\n"
+      end
+
+      it 'should print string of search result' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
+      end
     end
   end
 end

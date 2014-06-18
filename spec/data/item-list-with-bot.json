@@ -6,7 +6,7 @@
             "from": "GitHub",
             "id": "ae1140b3-be80-4bbd-9e97-a61c77185d02",
             "mentions": [],
-            "message": "<a href=\"https://github.com/kasei-san\">mgi166</a> commented on <a href=\"https://github.com/mgi166/hipchat-searcher/pull/118#issuecomment-46279110\">pull request 118</a> of <a href=\"https://github.com/mgi166/hipchat-searcher\">mgi166/hipchat-searcher</a>: ...",
+            "message": "mgi166 commented on pull request 118 ...",
             "message_format": "html"
         },
         {
@@ -48,7 +48,7 @@
             "id": "abe58437-977c-49fb-bd9b-2d8016356983",
             "mentions": [],
             "message": "(beer)"
-        },
+        }
     ],
     "links": {
         "self": "https://api.hipchat.com/v2/room/death-note/history"
