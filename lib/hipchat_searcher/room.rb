@@ -32,7 +32,7 @@ class HipchatSearcher
       end
     end
 
-    def names
+    def room
       result = Result.new(get_all_room)
       result.rooms
     end

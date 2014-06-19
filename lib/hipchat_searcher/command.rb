@@ -11,7 +11,7 @@ class HipchatSearcher
                 [@options.room]
               else
                 room = Room.new(@config.token, @options.room_options)
-                room.names
+                room.room
               end
 
       message  = Message.new(@config.token, @options.message_options)
