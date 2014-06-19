@@ -34,7 +34,7 @@ class HipchatSearcher
 
     def names
       result = Result.new(get_all_room)
-      result.room_names
+      result.rooms
     end
   end
 end

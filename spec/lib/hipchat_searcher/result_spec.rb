@@ -61,16 +61,26 @@ describe HipchatSearcher::Result do
     end
   end
 
-  describe '#room_names' do
-    subject { result(response).room_names }
+  describe '#rooms' do
+    context 'the value' do
+      subject { result(response).rooms }
 
-    let(:response) { eval File.read(path) }
-    let(:path)     { File.join('spec', 'data', 'room-list.txt') }
+      let(:response) { eval File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'room-list.txt') }
 
-    it { should be_instance_of Array }
+      it { should be_instance_of Array }
+    end
 
-    it 'should return room names' do
-      should == ["sample-1", "sample-2", "sample-3"]
+    context 'the element' do
+      let(:rooms)    { result(response).rooms.first }
+      let(:response) { eval File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'room-list.txt') }
+
+      it { rooms.should be_instance_of ::Hashie::Mash }
+
+      it 'should have keys "id", "links", "name"' do
+        rooms.keys.should == ['id', 'links', 'name']
+      end
     end
   end
 

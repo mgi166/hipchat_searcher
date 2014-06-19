@@ -11,8 +11,8 @@ class HipchatSearcher
       valid!
     end
 
-    def room_names
-      @response['items'].map {|i| i['name'] }
+    def rooms
+      @response['items'].map {|i| ::Hashie::Mash.new(i) }
     end
 
     def items
