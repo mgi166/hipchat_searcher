@@ -8,13 +8,14 @@ class HipchatSearcher
       @client  = ::HipChat::Client.new(@token, api_version: 'v2')
     end
 
-    def get_history(room)
-      @client[room].history(@options)
+    def get_history(id)
+      @client[id].history(@options)
     end
 
     def history(room)
-      h = get_history(room)
-      Result.new(h).tap {|r| r.room = room }
+      id = room.id
+      h  = get_history(id)
+      Result.new(h).tap {|r| r.room = room.name }
     end
   end
 end
