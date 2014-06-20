@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'hipchat'
-gem 'hashie'
-gem 'colorize'
-gem 'rspec'
+# Specify your gem's dependencies in hipchat_searcher.gemspec
+gemspec
