@@ -1,5 +1,3 @@
 module HipchatSearcher
-  module Verison
-    VERSION = '0.0.1'
-  end
+  VERSION = "0.0.1"
 end
