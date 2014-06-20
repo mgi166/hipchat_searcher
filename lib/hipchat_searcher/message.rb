@@ -13,9 +13,11 @@ class HipchatSearcher
     end
 
     def history(room)
-      id = room.id
-      h  = get_history(id)
-      Result.new(h).tap {|r| r.room = room.name }
+      id        = room.id   rescue room
+      room_name = room.name rescue room
+
+      h = get_history(id)
+      Result.new(h).tap {|r| r.room = room_name }
     end
   end
 end

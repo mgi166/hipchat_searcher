@@ -14,7 +14,7 @@ class HipchatSearcher
                 room.room
               end
 
-      message  = Message.new(@config.token, @options.message_options)
+      message = Message.new(@config.token, @options.message_options)
 
       rooms.inject([]) do |result, room|
         hist = message.history(room)
