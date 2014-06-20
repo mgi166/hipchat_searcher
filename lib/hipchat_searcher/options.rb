@@ -1,6 +1,6 @@
 require 'hashie/mash'
 
-class HipchatSearcher
+module HipchatSearcher
   class Options < Hashie::Mash
     def archived
       self['a'] || self['archived']

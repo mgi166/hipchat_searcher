@@ -1,6 +1,6 @@
 require 'colorize'
 
-class HipchatSearcher
+module HipchatSearcher
   class Searcher
     def initialize(result, options={})
       @result     = result

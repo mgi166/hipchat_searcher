@@ -1,4 +1,4 @@
-class HipchatSearcher
+module HipchatSearcher
   class Command
     def initialize(pattern, options)
       @pattern = pattern

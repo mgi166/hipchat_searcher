@@ -1,4 +1,4 @@
-class HipchatSearcher
+module HipchatSearcher
   class Config
     attr_reader :token
     def initialize

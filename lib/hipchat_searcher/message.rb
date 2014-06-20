@@ -1,6 +1,6 @@
 require 'hipchat'
 
-class HipchatSearcher
+module HipchatSearcher
   class Message
     def initialize(token, options={})
       @token   = token

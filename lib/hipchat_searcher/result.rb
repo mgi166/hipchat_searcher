@@ -1,6 +1,6 @@
 require 'json'
 
-class HipchatSearcher
+module HipchatSearcher
   class Result
     class InvalidResponse < StandardError; end
 

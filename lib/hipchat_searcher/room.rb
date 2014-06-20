@@ -1,7 +1,7 @@
 require 'hipchat'
 require 'httparty'
 
-class HipchatSearcher
+module HipchatSearcher
   class Room
     include HTTParty
 
