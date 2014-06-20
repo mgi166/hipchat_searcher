@@ -101,7 +101,7 @@ describe HipchatSearcher::Searcher do
 
       let(:search_result) do
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-        "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n"
+        "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n\n"
       end
 
       it 'should print string of search result' do
@@ -123,7 +123,7 @@ describe HipchatSearcher::Searcher do
 
       let(:search_result) do
         '  Date: 2014-06-17T08:14:48.305590+00:00' + "\n" + \
-        "  @GitHub: \e[4;39;49mmgi166\e[0m commented on pull request 118 ..." + "\n"
+        "  @GitHub: \e[4;39;49mmgi166\e[0m commented on pull request 118 ..." + "\n\n"
       end
 
       it 'should print string of search result' do

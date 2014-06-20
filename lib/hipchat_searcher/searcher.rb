@@ -19,7 +19,6 @@ class HipchatSearcher
         if pattern =~ item.message
           @print_room ? nil : puts_room
           puts_search_result(pattern, item)
-          puts
         end
       end
 
@@ -43,7 +42,7 @@ class HipchatSearcher
       date = "  Date: #{item.date}"
       name = item.from.mention_name rescue item.from
       msg  = "  @#{name}" + ': ' + msg
-      puts "%s\n%s" % [date, msg]
+      puts "%s\n%s\n\n" % [date, msg]
     end
   end
 end
