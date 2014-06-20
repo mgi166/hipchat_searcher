@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = HipchatSearcher::VERSION
   spec.authors       = ["mgi166"]
   spec.email         = ["skskoari@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Search hipchat log on terminal}
+  spec.description   = %q{Search hipchat log on terminal}
   spec.homepage      = ""
   spec.license       = "MIT"
 
