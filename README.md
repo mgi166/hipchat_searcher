@@ -1,18 +1,9 @@
 # HipchatSearcher
 
-TODO: Write a gem description
+This is the command line tool for `hipchat`.  
+You will be able to search hipchat log more easily.  
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'hipchat_searcher'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install hipchat_searcher
 
