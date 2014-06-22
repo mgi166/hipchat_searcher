@@ -7,7 +7,7 @@ describe HipchatSearcher::Options do
       let(:hash) { {'d' => '2014-06-01' } }
 
       it 'should return hash include key "include-archived"' do
-        should == { 'date' => '2014-06-01' }
+        should == { :date => '2014-06-01' }
       end
     end
 

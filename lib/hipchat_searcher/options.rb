@@ -19,7 +19,7 @@ module HipchatSearcher
     end
 
     def message_options
-       date? ? { 'date' => date } : {}
+      date? ? { date: date } : {}
     end
 
     def room_options
@@ -43,12 +43,12 @@ module HipchatSearcher
     end
 
     def search_options
-      user? ? { 'user' => user } : {}
+      user? ? { user: user } : {}
     end
 
     class << self
       def short_names
-        'f:h:r:u'
+        'a:d:h:r:u'
       end
 
       def long_names
