@@ -34,12 +34,6 @@ hps word
 hps word -r room-name
 ```
 
-* Search word that user talks
-
-```
-hps word -u user-name
-```
-
 * Search word since target date
 
 ```
