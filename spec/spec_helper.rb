@@ -1,3 +1,11 @@
+require 'simpleconv'
+require 'coveralls'
+
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start do
+  add_filter '.bundle'
+end
+
 require 'hipchat_searcher'
 
 RSpec.configure do |config|
