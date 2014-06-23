@@ -22,8 +22,14 @@ module HipchatSearcher
       msg  = "  @#{name}" + ': ' + msg
 
       if option_user?
-        @options[:user] == name ? (puts "%s\n%s\n\n" % [date, msg]) : nil
+        if @options[:user] == name
+          print_room? ? nil : puts_room
+          puts "%s\n%s\n\n" % [date, msg]
+        else
+          nil
+        end
       else
+        print_room? ? nil : puts_room
         puts "%s\n%s\n\n" % [date, msg]
       end
     end
@@ -33,7 +39,6 @@ module HipchatSearcher
 
       @result.items.each do |item|
         if pattern =~ item.message
-          print_room? ? nil : puts_room
           puts_search_result(pattern, item)
         end
       end

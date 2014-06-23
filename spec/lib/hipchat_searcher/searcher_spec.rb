@@ -90,7 +90,7 @@ describe HipchatSearcher::Searcher do
 
   describe '#puts_search_result' do
     context 'when only person in room' do
-      subject { searcher(double(:result)).puts_search_result(pattern, item) }
+      subject { searcher(double(:result, room: 'Joestars')).puts_search_result(pattern, item) }
 
       let(:pattern) { Regexp.new('yare') }
       let(:item) do
@@ -100,6 +100,7 @@ describe HipchatSearcher::Searcher do
       end
 
       let(:search_result) do
+        "Joestars" + "\n" + \
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
         "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n\n"
       end
@@ -112,7 +113,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context 'when person and bot in room' do
-      subject { searcher(double(:result)).puts_search_result(pattern, item) }
+      subject { searcher(double(:result, room: 'Joestars')).puts_search_result(pattern, item) }
 
       let(:pattern) { Regexp.new('mgi166') }
       let(:item) do
@@ -122,6 +123,7 @@ describe HipchatSearcher::Searcher do
       end
 
       let(:search_result) do
+        "Joestars" + "\n" + \
         '  Date: 2014-06-17T08:14:48.305590+00:00' + "\n" + \
         "  @GitHub: \e[4;39;49mmgi166\e[0m commented on pull request 118 ..." + "\n\n"
       end
@@ -134,7 +136,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified but the user don't speak this message" do
-      subject { described_class.new(double(:result), user: 'jotaro').puts_search_result(pattern, item) }
+      subject { described_class.new(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
 
       let(:pattern)  { 'ze' }
       let(:item) do
@@ -151,7 +153,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified and the user speak this message" do
-      subject { described_class.new(double(:result), user: 'jotaro').puts_search_result(pattern, item) }
+      subject { described_class.new(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
 
       let(:pattern)  { 'ze' }
       let(:item) do
@@ -161,6 +163,7 @@ describe HipchatSearcher::Searcher do
       end
 
       let(:search_result) do
+        "Joestars" + "\n" + \
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
         "  @jotaro: yareyare da\e[4;39;49mze\e[0m" + "\n" + \
         "\n"
