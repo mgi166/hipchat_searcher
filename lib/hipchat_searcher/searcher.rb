@@ -13,20 +13,13 @@ module HipchatSearcher
     end
 
     def puts_search_result(pattern, item)
-      msg = item.message.gsub(pattern) do |matched|
-        matched.underline
-      end
-
-      date = "  Date: #{item.date}"
-      name = item.from.mention_name rescue item.from
-      msg  = "  @#{name}" + ': ' + msg
-
+      contents = contents(pattern, item)
       if option_user?
-        if @options[:user] == name
-          puts_contents(date, msg)
+        if @options[:user] == user_name(item)
+          puts_contents(contents)
         end
       else
-        puts_contents(date, msg)
+        puts_contents(contents)
       end
     end
 
@@ -44,6 +37,30 @@ module HipchatSearcher
 
     private
 
+    def contents(pattern, item)
+      date    = date(item)
+      message = message(pattern, item)
+
+      "%s\n%s\n\n" % [date, message]
+    end
+
+    def date(item)
+      "  Date: #{item.date}"
+    end
+
+    def message(pattern, item)
+      msg = item.message.gsub(pattern) do |matched|
+        matched.underline
+      end
+
+      name = user_name(item)
+      "  @#{name}" + ': ' + msg
+    end
+
+    def user_name(item)
+      item.from.mention_name rescue item.from
+    end
+
     def option_user?
       !!@options[:user]
     end
@@ -57,9 +74,9 @@ module HipchatSearcher
       puts room
     end
 
-    def puts_contents(date, message)
+    def puts_contents(contents)
       print_room? ? nil : puts_room
-      puts "%s\n%s\n\n" % [date, message]
+      puts contents
     end
 
     def room
