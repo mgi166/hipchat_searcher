@@ -104,7 +104,7 @@ describe HipchatSearcher::Searcher do
         "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n\n"
       end
 
-      it 'should print string of search result' do
+      it 'should print message of search result' do
         expect do
           subject
         end.to output(search_result).to_stdout
@@ -126,7 +126,7 @@ describe HipchatSearcher::Searcher do
         "  @GitHub: \e[4;39;49mmgi166\e[0m commented on pull request 118 ..." + "\n\n"
       end
 
-      it 'should print string of search result' do
+      it 'should print message of search result' do
         expect do
           subject
         end.to output(search_result).to_stdout
