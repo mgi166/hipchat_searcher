@@ -176,4 +176,21 @@ describe HipchatSearcher::Searcher do
       end
     end
   end
+
+  describe '#contents' do
+    subject { searcher(double(:result)).contents(pattern, item) }
+
+    let(:pattern)  { 'ze' }
+    let(:item) do
+      src  = File.read(File.join('spec', 'data', 'item-list.json'))
+      hash = JSON.parse(src)
+      ::Hashie::Mash.new(hash).items.first
+    end
+
+    it 'should return string for search result contents' do
+      should == "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
+                "  @jotaro: yareyare da\e[4;39;49mze\e[0m" + "\n" + \
+                "\n"
+    end
+  end
 end

@@ -12,6 +12,13 @@ module HipchatSearcher
       new(result, options).search(pattern)
     end
 
+    def contents(pattern, item)
+      date    = date(item)
+      message = message(pattern, item)
+
+      "%s\n%s\n\n" % [date, message]
+    end
+
     def puts_search_result(pattern, item)
       contents = contents(pattern, item)
       if option_user?
@@ -37,13 +44,6 @@ module HipchatSearcher
 
     private
 
-    def contents(pattern, item)
-      date    = date(item)
-      message = message(pattern, item)
-
-      "%s\n%s\n\n" % [date, message]
-    end
-
     def date(item)
       "  Date: #{item.date}"
     end
@@ -55,10 +55,6 @@ module HipchatSearcher
 
       name = user_name(item)
       "  @#{name}" + ': ' + msg
-    end
-
-    def user_name(item)
-      item.from.mention_name rescue item.from
     end
 
     def option_user?
@@ -81,6 +77,10 @@ module HipchatSearcher
 
     def room
       @result.room
+    end
+
+    def user_name(item)
+      item.from.mention_name rescue item.from
     end
   end
 end
