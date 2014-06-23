@@ -31,7 +31,7 @@ module HipchatSearcher
     end
 
     def search(pattern)
-      pattern = Regexp.new(pattern)
+      pattern = Regexp.new(pattern, Regexp::IGNORECASE)
 
       @result.items.each do |item|
         if pattern =~ item.message
