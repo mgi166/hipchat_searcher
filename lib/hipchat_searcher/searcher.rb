@@ -23,14 +23,10 @@ module HipchatSearcher
 
       if option_user?
         if @options[:user] == name
-          print_room? ? nil : puts_room
-          puts "%s\n%s\n\n" % [date, msg]
-        else
-          nil
+          puts_contents(date, msg)
         end
       else
-        print_room? ? nil : puts_room
-        puts "%s\n%s\n\n" % [date, msg]
+        puts_contents(date, msg)
       end
     end
 
@@ -59,6 +55,11 @@ module HipchatSearcher
     def puts_room
       @print_room = true
       puts room
+    end
+
+    def puts_contents(date, message)
+      print_room? ? nil : puts_room
+      puts "%s\n%s\n\n" % [date, message]
     end
 
     def room
