@@ -6,6 +6,10 @@ module HipchatSearcher
       @config  = Config.new
     end
 
+    def self.run(pattern, options)
+      new(pattern, options).run
+    end
+
     def run
       rooms = if @options.room?
                 [@options.room]

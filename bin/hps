@@ -4,7 +4,7 @@ require 'hipchat_searcher'
 require 'optparse'
 
 pattern = ARGV.shift
-hash = ARGV.getopts(HipchatSearcher::Options.short_names, *HipchatSearcher::Options.long_names)
+hash    = ARGV.getopts(HipchatSearcher::Options.short_names, *HipchatSearcher::Options.long_names)
 options = HipchatSearcher::Options.new(hash)
-command = HipchatSearcher::Command.new(pattern, options)
-command.run
+
+HipchatSearcher::Command.run(pattern, options)
