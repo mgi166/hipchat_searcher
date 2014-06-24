@@ -18,6 +18,10 @@ module HipchatSearcher
       !!self['d'] || !!self['date']
     end
 
+    def help?
+      !!self['h'] || !!self['help']
+    end
+
     def message_options
       date? ? { date: date } : {}
     end
@@ -53,6 +57,19 @@ module HipchatSearcher
 
       def long_names
         ['room' 'user', 'date', 'archived', 'help']
+      end
+
+      def help
+        <<-EOS
+Usage: hps [searchword] [options]
+
+  -r, --room : Search only the log of the room that you specified
+  -r, --user : Search only the log that specified user talk
+  -a, --archived : Include in the search of the room that have been archived
+  -d, --date : Search the log since specified date
+
+  -h, --help : Show this message
+        EOS
       end
     end
   end
