@@ -16,6 +16,7 @@ hash = Slop.parse(help: true) do
 
   on '-v', '--version', 'Print the version' do
     puts HipchatSearcher::VERSION
+    exit 0
   end
 end.to_hash
 
