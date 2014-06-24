@@ -11,10 +11,14 @@ module HipchatSearcher
     end
 
     def run
+      room = Room.new(@config.token, @options.room_options)
+
       rooms = if @options.room?
-                @options.room.split(',')
+                room_names = @options.room.split(',')
+                room.room.select do |r|
+                  room_names.include?(r.name)
+                end
               else
-                room = Room.new(@config.token, @options.room_options)
                 room.room
               end
 
