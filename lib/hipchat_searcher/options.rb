@@ -2,44 +2,12 @@ require 'hashie/mash'
 
 module HipchatSearcher
   class Options < Hashie::Mash
-    def archived?
-      !!self['a'] || !!self['archived']
-    end
-
-    def date
-      self['d'] || self['date']
-    end
-
-    def date?
-      !!self['d'] || !!self['date']
-    end
-
-    def help?
-      !!self['h'] || !!self['help']
-    end
-
     def message_options
       date? ? { date: date } : {}
     end
 
     def room_options
       archived? ? { 'include-archived' => true } : {}
-    end
-
-    def room
-      self['r'] || self['room']
-    end
-
-    def room?
-      !!self['r'] || !!self['room']
-    end
-
-    def user
-      self['u'] || self['user']
-    end
-
-    def user?
-      !!self['u'] || !!self['user']
     end
 
     def search_options
