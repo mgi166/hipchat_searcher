@@ -32,7 +32,7 @@ module HipchatSearcher
       end
     end
 
-    def room
+    def all_room
       result = Result.new(get_all_room)
       result.rooms
     end
