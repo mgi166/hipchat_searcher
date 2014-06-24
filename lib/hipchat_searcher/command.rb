@@ -12,7 +12,7 @@ module HipchatSearcher
 
     def run
       rooms = if @options.room?
-                [@options.room]
+                @options.room.split(',')
               else
                 room = Room.new(@config.token, @options.room_options)
                 room.room
