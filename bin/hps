@@ -1,10 +1,25 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'hipchat_searcher'
-require 'optparse'
+require 'slop'
 
-pattern = ARGV.shift
-hash    = ARGV.getopts(HipchatSearcher::Options.short_names, *HipchatSearcher::Options.long_names)
+hash = Slop.parse(help: true) do
+  banner 'Usage: hps [searchword] [options]'
+
+  HipchatSearcher::Options.with_value.each do |opt|
+    on *opt
+  end
+
+  HipchatSearcher::Options.with_boolean.each do |opt|
+    on *opt
+  end
+
+  on '-v', '--version', 'Print the version' do
+    puts HipchatSearcher::VERSION
+  end
+end.to_hash
+
 options = HipchatSearcher::Options.new(hash)
 
+# run command
 HipchatSearcher::Command.run(pattern, options)

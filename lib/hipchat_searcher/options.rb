@@ -2,10 +2,6 @@ require 'hashie/mash'
 
 module HipchatSearcher
   class Options < Hashie::Mash
-    def archived
-      self['a'] || self['archived']
-    end
-
     def archived?
       !!self['a'] || !!self['archived']
     end
@@ -51,25 +47,21 @@ module HipchatSearcher
     end
 
     class << self
-      def short_names
-        'a:d:h:r:u:'
+
+      # [shortname, longname, description]
+      def with_value
+        [
+         ['r=', 'room=', 'Search only the log of the room that you specified'],
+         ['u=', 'user=', 'Search only the log that specified user talk'],
+         ['d=', 'date=', 'Search the log since specified date'],
+        ]
       end
 
-      def long_names
-        ['room' 'user', 'date', 'archived', 'help']
-      end
-
-      def help
-        <<-EOS
-Usage: hps [searchword] [options]
-
-  -r, --room : Search only the log of the room that you specified
-  -r, --user : Search only the log that specified user talk
-  -a, --archived : Include in the search of the room that have been archived
-  -d, --date : Search the log since specified date
-
-  -h, --help : Show this message
-        EOS
+      # [shortname, longname, description]
+      def with_boolean
+        [
+         ['a', 'archived', 'Include in the search of the room that have been archived']
+        ]
       end
     end
   end
