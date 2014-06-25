@@ -13,8 +13,8 @@ You will be able to search hipchat log more easily.
 
 ## Prepare
 
-* `hitchat_searcher` requires access token on [hipchat](https://www.hipchat.com/). so you visit [hipchat](https://www.hipchat.com/). login and get access token.
-* if you get access token, execute command like this.
+* `hitchat_searcher` requires access token on [hipchat](https://www.hipchat.com/). so you visit [hipchat](https://www.hipchat.com/), login and get access token.
+* If you get access token, execute command like this.
 
 ```
 echo {access_token} > ~/.hps
@@ -22,25 +22,33 @@ echo {access_token} > ~/.hps
 
 ## Usage
 
-* Search word in all room
+`hipchat_searcher` search for a regular expression the words that you specify.
+
+* Search the words in all room
 
 ```
 hps word
 ```
 
-* Search word in specified room
+* Search the words in specified room
 
 ```
 hps word -r room-name
 ```
 
-* Search word since target date
+* Search the words that specified user talks
+
+```
+hps word -u user-name
+```
+
+* Search the words since target date
 
 ```
 hps word -d 2014-01-01
 ```
 
-* Search word in archived room
+* Search the words in archived room
 
 ```
 hps word -a
