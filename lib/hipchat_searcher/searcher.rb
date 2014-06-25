@@ -50,7 +50,7 @@ module HipchatSearcher
 
     def message(pattern, item)
       msg = item.message.gsub(pattern) do |matched|
-        matched.underline
+        matched.colorize(:red)
       end
 
       name = user_name(item)
@@ -67,7 +67,7 @@ module HipchatSearcher
 
     def puts_room
       @print_room = true
-      puts room
+      puts room.underline
     end
 
     def puts_contents(contents)

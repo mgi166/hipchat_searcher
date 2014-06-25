@@ -17,9 +17,9 @@ describe HipchatSearcher::Searcher do
         r
       end
       let(:search_result) do
-        "Joestars" + "\n" + \
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-        "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n" + \
+        "  @jotaro: \e[0;31;49myare\e[0m\e[0;31;49myare\e[0m daze" + "\n" + \
         "\n"
       end
 
@@ -41,12 +41,12 @@ describe HipchatSearcher::Searcher do
         r
       end
       let(:search_result) do
-        "Joestars" + "\n" + \
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-        "  @jotaro: yareyare da\e[4;39;49mze\e[0m" + "\n" \
+        "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" \
         "\n" + \
         "  Date: 2014-06-09T11:29:10.209014+00:00" + "\n" + \
-        "  @polnareff: a... arinomama ima okotta koto wo hanasu \e[4;39;49mze\e[0m" + "\n" + \
+        "  @polnareff: a... arinomama ima okotta koto wo hanasu \e[0;31;49mze\e[0m" + "\n" + \
         "\n"
       end
 
@@ -65,7 +65,7 @@ describe HipchatSearcher::Searcher do
       let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
 
       it { should be_nil }
-
+p
       it 'should no output to stdout' do
         expect do
           subject
@@ -100,9 +100,10 @@ describe HipchatSearcher::Searcher do
       end
 
       let(:search_result) do
-        "Joestars" + "\n" + \
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-        "  @jotaro: \e[4;39;49myare\e[0m\e[4;39;49myare\e[0m daze" + "\n\n"
+        "  @jotaro: \e[0;31;49myare\e[0m\e[0;31;49myare\e[0m daze" + "\n" + \
+        "\n"
       end
 
       it 'should print message of search result' do
@@ -123,9 +124,9 @@ describe HipchatSearcher::Searcher do
       end
 
       let(:search_result) do
-        "Joestars" + "\n" + \
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
         '  Date: 2014-06-17T08:14:48.305590+00:00' + "\n" + \
-        "  @GitHub: \e[4;39;49mmgi166\e[0m commented on pull request 118 ..." + "\n\n"
+        "  @GitHub: \e[0;31;49mmgi166\e[0m commented on pull request 118 ..." + "\n\n"
       end
 
       it 'should print message of search result' do
@@ -163,9 +164,9 @@ describe HipchatSearcher::Searcher do
       end
 
       let(:search_result) do
-        "Joestars" + "\n" + \
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
         "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-        "  @jotaro: yareyare da\e[4;39;49mze\e[0m" + "\n" + \
+        "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" \
         "\n"
       end
 
@@ -189,7 +190,7 @@ describe HipchatSearcher::Searcher do
 
     it 'should return string for search result contents' do
       should == "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-                "  @jotaro: yareyare da\e[4;39;49mze\e[0m" + "\n" + \
+                "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" \
                 "\n"
     end
   end
