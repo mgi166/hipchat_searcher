@@ -23,4 +23,4 @@ end.to_hash
 options = HipchatSearcher::Options.new(hash)
 
 # run command
-HipchatSearcher::Command.run(pattern, options)
+HipchatSearcher::Command.run(ARGV.shift, options)
