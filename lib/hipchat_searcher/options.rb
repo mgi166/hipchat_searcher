@@ -19,9 +19,12 @@ module HipchatSearcher
       # [shortname, longname, description]
       def with_value
         [
-         ['r=', 'room=', 'Search only the log of the room that you specified'],
-         ['u=', 'user=', 'Search only the log that specified user talk'],
-         ['d=', 'date=', 'Search the log since specified date'],
+         ['r=', 'room=',           'Search only the log of the room that you specified'],
+         ['u=', 'user=',           'Search only the log that specified user talk'],
+         ['d=', 'date=',           'Search the log since specified date'],
+         ['A=', 'after_context=',  'Search the log that trails context after each match'],
+         ['B=', 'before_context=', 'Search the log that trails context before each match'],
+         ['C=', 'context=',        'Search the log that trails context surround each match'],
         ]
       end
 
