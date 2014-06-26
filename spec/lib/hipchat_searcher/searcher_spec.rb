@@ -65,7 +65,7 @@ describe HipchatSearcher::Searcher do
       let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
 
       it { should be_nil }
-p
+
       it 'should no output to stdout' do
         expect do
           subject
