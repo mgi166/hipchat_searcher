@@ -61,6 +61,18 @@ module HipchatSearcher
       !!@options[:user]
     end
 
+    def option_after?
+      !!@options[:after_context]
+    end
+
+    def option_before?
+      !!@options[:before_context]
+    end
+
+    def option_context?
+      !!@options[:context]
+    end
+
     def print_room?
       !!@print_room
     end
