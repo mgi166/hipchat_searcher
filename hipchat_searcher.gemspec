@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["mgi166"]
   spec.email         = ["skskoari@gmail.com"]
   spec.summary       = %q{Search hipchat log on terminal}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/mgi166/hipchat_searcher"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
