@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe HipchatSearcher::Searcher do
-  def searcher(result)
-    described_class.new(result)
+  def searcher(result, options={})
+    described_class.new(result, options)
   end
 
   describe '#search' do
@@ -137,7 +137,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified but the user don't speak this message" do
-      subject { described_class.new(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
+      subject { searcher(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
 
       let(:pattern)  { 'ze' }
       let(:item) do
@@ -154,7 +154,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified and the user speak this message" do
-      subject { described_class.new(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
+      subject { searcher(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
 
       let(:pattern)  { 'ze' }
       let(:item) do
