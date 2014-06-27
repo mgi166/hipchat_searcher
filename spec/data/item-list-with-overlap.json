@@ -1,0 +1,67 @@
+{
+    "items": [
+        {
+            "date": "2014-05-30T01:38:16.741565+00:00",
+            "from": {
+                "id": 12345,
+                "links": {"self": "https://api.hipchat.com/v2/user/12345"},
+                "mention_name": "jotaro",
+                "name": "Jotaro Kujo"
+            },
+            "id": "aaaa-bbbb-cccc",
+            "mentions": [],
+            "message": "yareyare daze"
+        },
+        {
+            "date": "2014-05-30T01:39:02.186319+00:00",
+            "from": {
+                "id": 23456,
+                "links": {"self": "https://api.hipchat.com/v2/user/23456"},
+                "mention_name": "noriaki",
+                "name": "Noriaki Kakyoin"
+            },
+            "id": "dddd-eeee-ffff",
+            "mentions": [],
+            "message": "rerorero"
+        },
+        {
+            "date": "2014-06-09T11:29:10.209014+00:00",
+            "from": {
+                "id": 34567,
+                "links": {"self": "https://api.hipchat.com/v2/user/34567"},
+                "mention_name": "polnareff",
+                "name": "Jean Pierre Polnareff"
+            },
+            "id": "gggg-hhhh-iiii",
+            "mentions": [],
+            "message": "a... arinomama ima okotta koto wo hanasu ze"
+        },
+        {
+            "date": "2014-06-10T08:36:09.281643+00:00",
+            "from": {
+                "id": 45678,
+                "links": {"self": "https://api.hipchat.com/v2/user/45678"},
+                "mention_name": "abdul",
+                "name": "mohamed abdul"
+            },
+            "id": "jjjj-kkkk-llll",
+            "mentions": [],
+            "message": "chirp chirp chirp"
+        },
+        {
+            "date": "2014-06-11T19:20:47.726182+00:00",
+            "from": {
+                "id": 34567,
+                "links": {"self": "https://api.hipchat.com/v2/user/34567"},
+                "mention_name": "lggy",
+                "name": "lggy"
+            },
+            "id": "mmmm-nnnn-oooo",
+            "mentions": [],
+            "message": "inu zuki no kodomo ha migoroshiniha dekine-ze"
+        }
+    ],
+    "links": {"self": "https://api.hipchat.com/v2/room/jojo-part3/history"},
+    "maxResults": 100,
+    "startIndex": 0
+}

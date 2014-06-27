@@ -57,6 +57,22 @@ describe HipchatSearcher::Searcher do
       end
     end
 
+    context 'when search_option --after_context' do
+      subject { searcher(result, after_context: '1').search(pattern) }
+
+      let(:pattern) { 'rero' }
+      let(:response) { File.read(File.join('spec', 'data', 'item-list-with-overlap.json')) }
+      let(:result) do
+        r = HipchatSearcher::Result.new(response)
+        r.room = "Joestars"
+        r
+      end
+
+      it 'should print the matched message and after context' do
+        p subject
+      end
+    end
+
     context "when don't match pattern in messages" do
       subject { searcher(result).search(pattern) }
 
