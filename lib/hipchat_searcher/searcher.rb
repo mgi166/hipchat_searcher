@@ -5,7 +5,7 @@ module HipchatSearcher
     def initialize(pattern, result, options={})
       @result     = result
       @options    = options
-      @pattern    = Regexp.new(pattern)
+      @pattern    = Regexp.new(pattern, Regexp::IGNORECASE)
       @print_room = false
       @print_item = {}
     end
