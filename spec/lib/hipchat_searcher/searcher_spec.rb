@@ -23,10 +23,77 @@ describe HipchatSearcher::Searcher do
   end
 
   describe '#extended_items' do
-    subject { searcher(pattern, result).items }
+    describe 'you speciy :before_context option' do
+      context 'when specify the range is included in the array' do
+        subject { searcher(pattern, result, before_context: '3').extended_items(3) }
 
-    let(:pattern) { 'fuga' }
-    let(:result)  { double(:result) }
+        let(:pattern) { 'fuga' }
+        let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
+
+        it 'should return the array of range to include index you specify' do
+          should == %w|2 3 4|
+        end
+      end
+
+      context 'when specify the range is exluded in the array' do
+        subject { searcher(pattern, result, before_context: '3').extended_items(1) }
+
+        let(:pattern) { 'fuga' }
+        let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
+
+        it 'should return the array includes range until index from first' do
+          should == %w|1 2|
+        end
+      end
+    end
+
+    describe 'you specify :after_context option' do
+      context 'when specify the range is included in the array' do
+        subject { searcher(pattern, result, after_context: '3').extended_items(1) }
+
+        let(:pattern) { 'fuga' }
+        let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
+
+        it 'should return the array of range to include index you specify' do
+          should == %w|2 3 4|
+        end
+      end
+
+      context 'when specify the range is exluded in the array' do
+        subject { searcher(pattern, result, after_context: '3').extended_items(4) }
+
+        let(:pattern) { 'fuga' }
+        let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
+
+        it 'should return the array includes range until the end from index' do
+          should == %w|5 6|
+        end
+      end
+    end
+
+    describe 'you specify :context option' do
+      context 'when specify the range is included in the array' do
+        subject { searcher(pattern, result, context: '2').extended_items(3) }
+
+        let(:pattern) { 'fuga' }
+        let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
+
+        it 'should return the array of range to surround index you specify' do
+          should == %w|2 3 4 5 6|
+        end
+      end
+
+      context 'when specify the range is exluded in the array' do
+        subject { searcher(pattern, result, context: '5').extended_items(3) }
+
+        let(:pattern) { 'fuga' }
+        let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
+
+        it 'should return the array includes range to surround as much as possible' do
+          should == %w|1 2 3 4 5 6|
+        end
+      end
+    end
   end
 
   describe '#search' do

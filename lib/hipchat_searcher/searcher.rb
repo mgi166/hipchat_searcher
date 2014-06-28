@@ -91,18 +91,22 @@ module HipchatSearcher
     end
 
     def range(index)
+      param = []
+
       case
       when option_before?
-        _i = index - @options[:before_context].to_i
-        Range.new(_i, index)
+        _i = index - (@options[:before_context].to_i - 1)
+        param = _i < 0 ? [0, index] : [_i, index]
       when option_after?
-        _i = index + @options[:after_context].to_i
-        Range.new(index, _i)
+        _i = index + (@options[:after_context].to_i - 1)
+        param = [index, _i]
       when option_context?
         _i = index - @options[:context].to_i
         _j = index + @options[:context].to_i
-        Range.new(_i, _j)
+        param = _i < 0 ? [0, _j] : [_i, _j]
       end
+
+      Range.new(*param)
     end
 
     def room
