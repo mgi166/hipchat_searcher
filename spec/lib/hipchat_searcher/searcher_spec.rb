@@ -5,6 +5,30 @@ describe HipchatSearcher::Searcher do
     described_class.new(pattern, result, options)
   end
 
+  describe '#items' do
+    subject { searcher(pattern, result).items }
+
+    let(:pattern) { 'hoge' }
+    let(:result) do
+      response = File.read(File.join('spec', 'data', 'item-list.json'))
+      HipchatSearcher::Result.new(response)
+    end
+
+    it { should be_instance_of Array }
+
+    it 'should return array with Hashie::Mash objects' do
+      subject.first.should be_instance_of ::Hashie::Mash
+      subject.last.should  be_instance_of ::Hashie::Mash
+    end
+  end
+
+  describe '#extended_items' do
+    subject { searcher(pattern, result).items }
+
+    let(:pattern) { 'fuga' }
+    let(:result)  { double(:result) }
+  end
+
   describe '#search' do
     context 'when matches pattern in messages' do
       subject { searcher(pattern, result).search }
