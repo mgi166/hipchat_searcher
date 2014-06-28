@@ -31,7 +31,7 @@ describe HipchatSearcher::Searcher do
         let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
 
         it 'should return the array of range to include index you specify' do
-          should == %w|2 3 4|
+          should == %w|1 2 3 4|
         end
       end
 
@@ -55,7 +55,7 @@ describe HipchatSearcher::Searcher do
         let(:result)  { double(:result, items: %w|1 2 3 4 5 6|) }
 
         it 'should return the array of range to include index you specify' do
-          should == %w|2 3 4|
+          should == %w|2 3 4 5|
         end
       end
 
@@ -148,6 +148,33 @@ describe HipchatSearcher::Searcher do
       end
     end
 
+    context 'when search_option --before_context' do
+      subject { searcher(pattern, result, before_context: '1').search }
+
+      let(:pattern) { 'inu' }
+      let(:result) do
+        response = File.read(File.join('spec', 'data', 'item-list-with-overlap.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
+      end
+      let(:search_result) do
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
+        "  Date: 2014-06-10T08:36:09.281643+00:00" + "\n" + \
+        "  @abdul: chirp chirp chirp" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-11T19:20:47.726182+00:00" + "\n" + \
+        "  @lggy: \e[0;31;49minu\e[0m zuki no kodomo ha migoroshiniha dekine-ze" + "\n" + \
+        "\n"
+      end
+
+      it 'should print the matched message and after context' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
+      end
+    end
+
     context 'when search_option --after_context' do
       subject { searcher(pattern, result, after_context: '1').search }
 
@@ -158,8 +185,89 @@ describe HipchatSearcher::Searcher do
           r.room = "Joestars"
         end
       end
+      let(:search_result) do
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
+        "  Date: 2014-05-30T01:39:02.186319+00:00" + "\n" + \
+        "  @noriaki: \e[0;31;49mrero\e[0m\e[0;31;49mrero\e[0m" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-09T11:29:10.209014+00:00" + "\n" + \
+        "  @polnareff: a... arinomama ima okotta koto wo hanasu ze" + "\n" + \
+        "\n"
+      end
 
       it 'should print the matched message and after context' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
+      end
+    end
+
+    context 'when search_option --context' do
+      subject { searcher(pattern, result, context: '2').search }
+
+      let(:pattern) { 'chirp' }
+      let(:result) do
+        response = File.read(File.join('spec', 'data', 'item-list-with-overlap.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
+      end
+      let(:search_result) do
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
+        "  Date: 2014-05-30T01:39:02.186319+00:00" + "\n" + \
+        "  @noriaki: rerorero" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-09T11:29:10.209014+00:00" + "\n" + \
+        "  @polnareff: a... arinomama ima okotta koto wo hanasu ze" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-10T08:36:09.281643+00:00" + "\n" + \
+        "  @abdul: \e[0;31;49mchirp\e[0m \e[0;31;49mchirp\e[0m \e[0;31;49mchirp\e[0m" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-11T19:20:47.726182+00:00" + "\n" + \
+        "  @lggy: inu zuki no kodomo ha migoroshiniha dekine-ze" + "\n" + \
+        "\n"
+      end
+
+      it 'should print the matched message and surround context' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
+      end
+    end
+
+    context 'when match result overlaped and specify search options' do
+      subject { searcher(pattern, result, after_context: '2').search }
+
+      let(:pattern) { 'ze' }
+      let(:result) do
+        response = File.read(File.join('spec', 'data', 'item-list-with-overlap.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
+      end
+      let(:search_result) do
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
+        "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
+        "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" + \
+        "\n" + \
+        "  Date: 2014-05-30T01:39:02.186319+00:00" + "\n" + \
+        "  @noriaki: rerorero" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-09T11:29:10.209014+00:00" + "\n" + \
+        "  @polnareff: a... arinomama ima okotta koto wo hanasu \e[0;31;49mze\e[0m" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-10T08:36:09.281643+00:00" + "\n" + \
+        "  @abdul: chirp chirp chirp" + "\n" + \
+        "\n" + \
+        "  Date: 2014-06-11T19:20:47.726182+00:00" + "\n" + \
+        "  @lggy: inu zuki no kodomo ha migoroshiniha dekine-\e[0;31;49mze\e[0m" + "\n" + \
+        "\n"
+      end
+
+      it 'should print the matched message without overlap' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
       end
     end
 

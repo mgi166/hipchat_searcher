@@ -95,10 +95,10 @@ module HipchatSearcher
 
       case
       when option_before?
-        _i = index - (@options[:before_context].to_i - 1)
+        _i = index - @options[:before_context].to_i
         param = _i < 0 ? [0, index] : [_i, index]
       when option_after?
-        _i = index + (@options[:after_context].to_i - 1)
+        _i = index + @options[:after_context].to_i
         param = [index, _i]
       when option_context?
         _i = index - @options[:context].to_i
