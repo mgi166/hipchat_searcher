@@ -108,15 +108,24 @@ describe HipchatSearcher::Searcher do
   end
 
   describe '#puts_search_result' do
+    def extended_items(path, pattern)
+      hash  = JSON.parse(File.read(path))
+      items = ::Hashie::Mash.new(hash).items
+      items.map do |itm|
+        itm.extend(HipchatSearcher::Searcher::ItemExtention).tap do |i|
+          i.pattern = Regexp.new(pattern)
+        end
+      end
+    end
+
     context 'when only person in room' do
       subject { searcher(pattern, result).puts_search_result(item) }
 
       let(:pattern) { 'yare' }
       let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
-        src  = File.read(File.join('spec', 'data', 'item-list.json'))
-        hash = JSON.parse(src)
-        ::Hashie::Mash.new(hash).items.first
+        path = File.join('spec', 'data', 'item-list.json')
+        extended_items(path, pattern).first
       end
 
       let(:search_result) do
@@ -139,9 +148,8 @@ describe HipchatSearcher::Searcher do
       let(:pattern) { 'mgi166' }
       let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
-        src  = File.read(File.join('spec', 'data', 'item-list-with-bot.json'))
-        hash = JSON.parse(src)
-        ::Hashie::Mash.new(hash).items.first
+        path = File.join('spec', 'data', 'item-list-with-bot.json')
+        extended_items(path, pattern).first
       end
 
       let(:search_result) do
@@ -163,9 +171,8 @@ describe HipchatSearcher::Searcher do
       let(:pattern) { 'ze' }
       let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
-        src  = File.read(File.join('spec', 'data', 'item-list.json'))
-        hash = JSON.parse(src)
-        ::Hashie::Mash.new(hash).items.last
+        path = File.join('spec', 'data', 'item-list.json')
+        extended_items(path, pattern).last
       end
 
       it 'should not print message' do
@@ -181,9 +188,8 @@ describe HipchatSearcher::Searcher do
       let(:pattern) { 'ze' }
       let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
-        src  = File.read(File.join('spec', 'data', 'item-list.json'))
-        hash = JSON.parse(src)
-        ::Hashie::Mash.new(hash).items.first
+        path = File.join('spec', 'data', 'item-list.json')
+        extended_items(path, pattern).first
       end
 
       let(:search_result) do
@@ -198,24 +204,6 @@ describe HipchatSearcher::Searcher do
           subject
         end.to output(search_result).to_stdout
       end
-    end
-  end
-
-  describe '#contents' do
-    subject { searcher(pattern, result).contents(item) }
-
-    let(:pattern) { 'ze' }
-    let(:result)  { double(:result) }
-    let(:item) do
-      src  = File.read(File.join('spec', 'data', 'item-list.json'))
-      hash = JSON.parse(src)
-      ::Hashie::Mash.new(hash).items.first
-    end
-
-    it 'should return string for search result contents' do
-      should == "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-                "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" \
-                "\n"
     end
   end
 end

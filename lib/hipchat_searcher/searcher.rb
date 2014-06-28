@@ -13,28 +13,22 @@ module HipchatSearcher
       new(pattern, result, options).search
     end
 
-    def contents(item)
-      date    = date(item)
-      message = message(item)
-
-      "%s\n%s\n\n" % [date, message]
-    end
-
     def puts_search_result(item)
-      contents = contents(item)
       if option_user?
-        if @options[:user] == user_name(item)
-          puts_contents(contents)
+        if @options[:user] == item.mention_name
+          puts_contents(item.contents)
         end
       else
-        puts_contents(contents)
+        puts_contents(item.contents)
       end
     end
 
     def search
       @result.items.each do |item|
         if @pattern =~ item.message
-          puts_search_result(item)
+          ext = item.extend(ItemExtention)
+          ext.pattern = @pattern
+          puts_search_result(ext)
         end
       end
 
@@ -42,19 +36,6 @@ module HipchatSearcher
     end
 
     private
-
-    def date(item)
-      "  Date: #{item.date}"
-    end
-
-    def message(item)
-      msg = item.message.gsub(@pattern) do |matched|
-        matched.colorize(:red)
-      end
-
-      name = user_name(item)
-      "  @#{name}" + ': ' + msg
-    end
 
     def option_user?
       !!@options[:user]
@@ -90,8 +71,28 @@ module HipchatSearcher
       @result.room
     end
 
-    def user_name(item)
-      item.from.mention_name rescue item.from
+    module ItemExtention
+      attr_accessor :pattern
+
+      def contents
+        "%s\n%s\n\n" % [_date, _message]
+      end
+
+      def mention_name
+        self.from.mention_name rescue self.from
+      end
+
+      def _date
+        "  Date: %s" % self.date
+      end
+
+      def _message
+        msg = self.message.gsub(pattern) do |matched|
+          matched.colorize(:red)
+        end
+
+        "  @%s: %s" % [mention_name, msg]
+      end
     end
   end
 end
