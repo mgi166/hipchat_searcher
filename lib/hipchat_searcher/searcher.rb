@@ -2,25 +2,26 @@ require 'colorize'
 
 module HipchatSearcher
   class Searcher
-    def initialize(result, options={})
+    def initialize(pattern, result, options={})
       @result     = result
       @options    = options
+      @pattern    = Regexp.new(pattern)
       @print_room = false
     end
 
     def self.search(pattern, result, options)
-      new(result, options).search(pattern)
+      new(pattern, result, options).search
     end
 
-    def contents(pattern, item)
+    def contents(item)
       date    = date(item)
-      message = message(pattern, item)
+      message = message(item)
 
       "%s\n%s\n\n" % [date, message]
     end
 
-    def puts_search_result(pattern, item)
-      contents = contents(pattern, item)
+    def puts_search_result(item)
+      contents = contents(item)
       if option_user?
         if @options[:user] == user_name(item)
           puts_contents(contents)
@@ -30,12 +31,10 @@ module HipchatSearcher
       end
     end
 
-    def search(pattern)
-      pattern = Regexp.new(pattern, Regexp::IGNORECASE)
-
+    def search
       @result.items.each do |item|
-        if pattern =~ item.message
-          puts_search_result(pattern, item)
+        if @pattern =~ item.message
+          puts_search_result(item)
         end
       end
 
@@ -48,8 +47,8 @@ module HipchatSearcher
       "  Date: #{item.date}"
     end
 
-    def message(pattern, item)
-      msg = item.message.gsub(pattern) do |matched|
+    def message(item)
+      msg = item.message.gsub(@pattern) do |matched|
         matched.colorize(:red)
       end
 

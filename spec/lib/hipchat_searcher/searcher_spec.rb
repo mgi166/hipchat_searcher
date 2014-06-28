@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe HipchatSearcher::Searcher do
-  def searcher(result, options={})
-    described_class.new(result, options)
+  def searcher(pattern, result, options={})
+    described_class.new(pattern, result, options)
   end
 
   describe '#search' do
     context 'when matches pattern in messages' do
-      subject { searcher(result).search(pattern) }
+      subject { searcher(pattern, result).search }
 
       let(:pattern)  { 'yare' }
       let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
@@ -31,7 +31,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context 'when matches pattern in many messages' do
-      subject { searcher(result).search(pattern) }
+      subject { searcher(pattern, result).search }
 
       let(:pattern)  { 'ze' }
       let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
@@ -58,7 +58,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context 'when search_option --after_context' do
-      subject { searcher(result, after_context: '1').search(pattern) }
+      subject { searcher(pattern, result, after_context: '1').search }
 
       let(:pattern) { 'rero' }
       let(:response) { File.read(File.join('spec', 'data', 'item-list-with-overlap.json')) }
@@ -69,12 +69,11 @@ describe HipchatSearcher::Searcher do
       end
 
       it 'should print the matched message and after context' do
-        p subject
       end
     end
 
     context "when don't match pattern in messages" do
-      subject { searcher(result).search(pattern) }
+      subject { searcher(pattern, result).search }
 
       let(:pattern)  { 'abcd' }
       let(:result)   { HipchatSearcher::Result.new(response) }
@@ -90,7 +89,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when pattern can't convert regexp" do
-      subject { searcher(result).search(pattern) }
+      subject { searcher(pattern, result).search }
 
       let(:pattern)  { nil }
       let(:result)   { HipchatSearcher::Result.new(response) }
@@ -106,9 +105,9 @@ describe HipchatSearcher::Searcher do
 
   describe '#puts_search_result' do
     context 'when only person in room' do
-      subject { searcher(double(:result, room: 'Joestars')).puts_search_result(pattern, item) }
+      subject { searcher(pattern, double(:result, room: 'Joestars')).puts_search_result(item) }
 
-      let(:pattern) { Regexp.new('yare') }
+      let(:pattern) { 'yare' }
       let(:item) do
         src  = File.read(File.join('spec', 'data', 'item-list.json'))
         hash = JSON.parse(src)
@@ -130,9 +129,9 @@ describe HipchatSearcher::Searcher do
     end
 
     context 'when person and bot in room' do
-      subject { searcher(double(:result, room: 'Joestars')).puts_search_result(pattern, item) }
+      subject { searcher(pattern, double(:result, room: 'Joestars')).puts_search_result(item) }
 
-      let(:pattern) { Regexp.new('mgi166') }
+      let(:pattern) { 'mgi166' }
       let(:item) do
         src  = File.read(File.join('spec', 'data', 'item-list-with-bot.json'))
         hash = JSON.parse(src)
@@ -153,7 +152,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified but the user don't speak this message" do
-      subject { searcher(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
+      subject { searcher(pattern, double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(item) }
 
       let(:pattern)  { 'ze' }
       let(:item) do
@@ -170,7 +169,7 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified and the user speak this message" do
-      subject { searcher(double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(pattern, item) }
+      subject { searcher(pattern, double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(item) }
 
       let(:pattern)  { 'ze' }
       let(:item) do
@@ -195,7 +194,7 @@ describe HipchatSearcher::Searcher do
   end
 
   describe '#contents' do
-    subject { searcher(double(:result)).contents(pattern, item) }
+    subject { searcher(pattern, double(:result)).contents(item) }
 
     let(:pattern)  { 'ze' }
     let(:item) do
