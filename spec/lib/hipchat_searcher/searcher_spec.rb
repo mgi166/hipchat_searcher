@@ -10,11 +10,11 @@ describe HipchatSearcher::Searcher do
       subject { searcher(pattern, result).search }
 
       let(:pattern)  { 'yare' }
-      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
       let(:result) do
-        r = HipchatSearcher::Result.new(response)
-        r.room = "Joestars"
-        r
+        response = File.read(File.join('spec', 'data', 'item-list.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
       end
       let(:search_result) do
         "\e[4;39;49mJoestars\e[0m" + "\n" + \
@@ -34,11 +34,11 @@ describe HipchatSearcher::Searcher do
       subject { searcher(pattern, result).search }
 
       let(:pattern)  { 'ze' }
-      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
       let(:result) do
-        r = HipchatSearcher::Result.new(response)
-        r.room = "Joestars"
-        r
+        response = File.read(File.join('spec', 'data', 'item-list.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
       end
       let(:search_result) do
         "\e[4;39;49mJoestars\e[0m" + "\n" + \
@@ -61,11 +61,11 @@ describe HipchatSearcher::Searcher do
       subject { searcher(pattern, result, after_context: '1').search }
 
       let(:pattern) { 'rero' }
-      let(:response) { File.read(File.join('spec', 'data', 'item-list-with-overlap.json')) }
       let(:result) do
-        r = HipchatSearcher::Result.new(response)
-        r.room = "Joestars"
-        r
+        response = File.read(File.join('spec', 'data', 'item-list-with-overlap.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
       end
 
       it 'should print the matched message and after context' do
@@ -75,9 +75,11 @@ describe HipchatSearcher::Searcher do
     context "when don't match pattern in messages" do
       subject { searcher(pattern, result).search }
 
-      let(:pattern)  { 'abcd' }
-      let(:result)   { HipchatSearcher::Result.new(response) }
-      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
+      let(:pattern) { 'abcd' }
+      let(:result) do
+        response = File.read(File.join('spec', 'data', 'item-list.json'))
+        HipchatSearcher::Result.new(response)
+      end
 
       it { should be_nil }
 
@@ -91,9 +93,11 @@ describe HipchatSearcher::Searcher do
     context "when pattern can't convert regexp" do
       subject { searcher(pattern, result).search }
 
-      let(:pattern)  { nil }
-      let(:result)   { HipchatSearcher::Result.new(response) }
-      let(:response) { File.read(File.join('spec', 'data', 'item-list.json')) }
+      let(:pattern) { nil }
+      let(:result) do
+        response = File.read(File.join('spec', 'data', 'item-list.json'))
+        HipchatSearcher::Result.new(response)
+      end
 
       it 'should raise exception' do
         expect do
@@ -105,9 +109,10 @@ describe HipchatSearcher::Searcher do
 
   describe '#puts_search_result' do
     context 'when only person in room' do
-      subject { searcher(pattern, double(:result, room: 'Joestars')).puts_search_result(item) }
+      subject { searcher(pattern, result).puts_search_result(item) }
 
       let(:pattern) { 'yare' }
+      let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
         src  = File.read(File.join('spec', 'data', 'item-list.json'))
         hash = JSON.parse(src)
@@ -129,9 +134,10 @@ describe HipchatSearcher::Searcher do
     end
 
     context 'when person and bot in room' do
-      subject { searcher(pattern, double(:result, room: 'Joestars')).puts_search_result(item) }
+      subject { searcher(pattern, result).puts_search_result(item) }
 
       let(:pattern) { 'mgi166' }
+      let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
         src  = File.read(File.join('spec', 'data', 'item-list-with-bot.json'))
         hash = JSON.parse(src)
@@ -152,9 +158,10 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified but the user don't speak this message" do
-      subject { searcher(pattern, double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(item) }
+      subject { searcher(pattern, result, user: 'jotaro').puts_search_result(item) }
 
-      let(:pattern)  { 'ze' }
+      let(:pattern) { 'ze' }
+      let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
         src  = File.read(File.join('spec', 'data', 'item-list.json'))
         hash = JSON.parse(src)
@@ -169,9 +176,10 @@ describe HipchatSearcher::Searcher do
     end
 
     context "when user options specified and the user speak this message" do
-      subject { searcher(pattern, double(:result, room: 'Joestars'), user: 'jotaro').puts_search_result(item) }
+      subject { searcher(pattern, result, user: 'jotaro').puts_search_result(item) }
 
-      let(:pattern)  { 'ze' }
+      let(:pattern) { 'ze' }
+      let(:result)  { double(:result, room: 'Joestars') }
       let(:item) do
         src  = File.read(File.join('spec', 'data', 'item-list.json'))
         hash = JSON.parse(src)
@@ -194,9 +202,10 @@ describe HipchatSearcher::Searcher do
   end
 
   describe '#contents' do
-    subject { searcher(pattern, double(:result)).contents(item) }
+    subject { searcher(pattern, result).contents(item) }
 
-    let(:pattern)  { 'ze' }
+    let(:pattern) { 'ze' }
+    let(:result)  { double(:result) }
     let(:item) do
       src  = File.read(File.join('spec', 'data', 'item-list.json'))
       hash = JSON.parse(src)
