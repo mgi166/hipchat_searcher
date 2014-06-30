@@ -1,3 +1,10 @@
+# 0.0.3
+### Feature
+* Enable to search option `-A`, `-B`, `-C`, such as `grep`
+
+### Bugfix
+* Remove `#p` because `spec/lib/hipchat_searcher/searcher_spec.rb` was included
+
 # 0.0.2
 ### Feature
 * Enable to search Regexp on ignorecase.
