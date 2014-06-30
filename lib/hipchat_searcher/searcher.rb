@@ -87,7 +87,7 @@ module HipchatSearcher
 
     def puts_contents(item)
       print_room? ? nil : puts_room
-      puts item.contents unless print_item?(item.id)
+      puts item.contents unless printed?(item.id)
     end
 
     def range(index)
@@ -113,7 +113,7 @@ module HipchatSearcher
       @result.room
     end
 
-    def print_item?(id)
+    def printed?(id)
       if @print_item.key?(id)
         true
       else
