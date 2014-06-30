@@ -22,9 +22,11 @@ echo {access_token} > ~/.hps
 
 ## Usage
 
-`hipchat_searcher` search for a regular expression the words that you specify.
+`hipchat_searcher` search for a regular expression the words that you specify.  
+In the specifications of the [hipchat api](https://www.hipchat.com/docs/apiv2/), `hipchat_searcher` search of the upcoming 100 comments.
 
 * Search the words in all room
+   * But it searches ALL the room that user know, so there may be heavy.
 
 ```
 hps word
