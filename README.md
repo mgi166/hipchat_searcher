@@ -25,8 +25,7 @@ echo {access_token} > ~/.hps
 `hipchat_searcher` search for a regular expression the words that you specify.  
 In the specifications of the [hipchat api](https://www.hipchat.com/docs/apiv2/), `hipchat_searcher` search of the upcoming 100 comments.
 
-* Search the words in all room
-   * But it searches ALL the room that user know, so there may be heavy.
+* Search the words in all room. (but it searches ALL the room that user know, so there may be heavy)
 
 ```
 hps word
@@ -36,6 +35,24 @@ hps word
 
 ```
 hps word -r room-name
+```
+
+* Search the words of trailing context after each match. Such as `grep` command option.
+
+```
+hps word -A 2
+```
+
+* Search the words of trailing context before each match. Such as `grep` command option.
+
+```
+hps word -B 2
+```
+
+* Search the words of trailing context surrounding each match. The following is equivalent to -A 2 -B 2.
+
+```
+hps word -C 2
 ```
 
 * Search the words that specified user talks
