@@ -1,4 +1,3 @@
-require 'spec_helper'
 
 describe HipchatSearcher::Searcher do
   def searcher(pattern, result, options={})

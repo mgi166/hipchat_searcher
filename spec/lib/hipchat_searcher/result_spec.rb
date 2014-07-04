@@ -1,4 +1,3 @@
-require 'spec_helper'
 
 describe HipchatSearcher::Result do
   def result(response)
