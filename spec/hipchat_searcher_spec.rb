@@ -1,4 +1,3 @@
-require 'spec_helper'
 
 describe HipchatSearcher do
   it 'has a version number' do
