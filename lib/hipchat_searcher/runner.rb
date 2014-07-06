@@ -9,6 +9,10 @@ module HipchatSearcher
 
     def run
       result = @message.history(@room)
+      search(result)
+    end
+
+    def search(result)
       Searcher.search(@pattern, result, @options.search_options)
     end
   end
