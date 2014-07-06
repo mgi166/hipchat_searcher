@@ -25,8 +25,8 @@ module HipchatSearcher
       message = Message.new(@config.token, @options.message_options)
 
       rooms.each do |room|
-        hist = message.history(room)
-        Searcher.search(@pattern, hist, @options.search_options)
+        result = message.history(room)
+        Searcher.search(@pattern, result, @options.search_options)
       end
     end
   end
