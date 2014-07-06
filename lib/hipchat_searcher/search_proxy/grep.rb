@@ -15,6 +15,10 @@ module HipchatSearcher
 
       def_delegators :@simple, :items, :option_user?, :pattern, :print_room?, :puts_room, :room
 
+      def self.search(pattern, result, options)
+        new(pattern, result, options).search
+      end
+
       def around_items(index)
         items[range(index)].map do |itm|
           itm.extend(HipchatSearcher::ItemExtention).tap do |i|
