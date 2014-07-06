@@ -19,6 +19,10 @@ module HipchatSearcher
       end
     end
 
+    def grep_options?
+      !!before_context || !!after_context || !!context
+    end
+
     class << self
 
       # [shortname, longname, description]
