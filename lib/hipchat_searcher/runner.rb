@@ -1,14 +1,14 @@
 module HipchatSearcher
   class Runner
-    def initialize(pattern, room, config, options)
+    def initialize(pattern, room, options)
       @pattern = pattern
       @room    = room
-      @message = Message.new(config.token, options.message_options)
       @options = options
+      @message = Message.new(@options.config.token, @options.message_options)
     end
 
-    def self.run(pattern, room, config, options)
-      new(pattern, room, config, options).run
+    def self.run(pattern, room, options)
+      new(pattern, room, options).run
     end
 
     def run

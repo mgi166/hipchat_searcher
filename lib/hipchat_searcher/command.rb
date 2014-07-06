@@ -3,7 +3,7 @@ module HipchatSearcher
     def initialize(pattern, options)
       @pattern = pattern
       @options = options
-      @config  = Config.new
+      @options.config = Config.new
     end
 
     def self.run(pattern, options)
@@ -11,7 +11,7 @@ module HipchatSearcher
     end
 
     def run
-      all_room = Room.new(@config.token, @options.room_options).all_room
+      all_room = Room.new(@options.config.token, @options.room_options).all_room
 
       rooms = if @options.room?
                 room_names = @options.room.split(',')
@@ -23,7 +23,7 @@ module HipchatSearcher
               end
 
       rooms.each do |room|
-        Runner.run(@pattern, room, @config, @options)
+        Runner.run(@pattern, room, @options)
       end
     end
   end
