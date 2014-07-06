@@ -112,7 +112,7 @@ describe HipchatSearcher::SearchProxy::Simple do
       hash  = JSON.parse(File.read(path))
       items = ::Hashie::Mash.new(hash).items
       items.map do |itm|
-        itm.extend(HipchatSearcher::Searcher::ItemExtention).tap do |i|
+        itm.extend(HipchatSearcher::ItemExtention).tap do |i|
           i.pattern = Regexp.new(pattern)
         end
       end
