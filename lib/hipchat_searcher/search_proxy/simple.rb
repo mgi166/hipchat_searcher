@@ -9,6 +9,8 @@ module HipchatSearcher
         @pattern    = Regexp.new(pattern, Regexp::IGNORECASE)
       end
 
+      attr_reader :pattern
+
       def self.search(pattern, result, options)
         new(pattern, result, options).search
       end
