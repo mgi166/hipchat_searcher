@@ -11,12 +11,16 @@ module HipchatSearcher
       valid!
     end
 
-    def rooms
-      @response['items'].map {|i| ::Hashie::Mash.new(i) }
+    def continue?
+      items.size == 100
     end
 
     def items
-      @messages = JSON.parse(@response)['items'].map {|i| ::Hashie::Mash.new(i) }
+      @items ||= JSON.parse(@response)['items'].map {|i| ::Hashie::Mash.new(i) }
+    end
+
+    def rooms
+      @response['items'].map {|i| ::Hashie::Mash.new(i) }
     end
 
     def valid!

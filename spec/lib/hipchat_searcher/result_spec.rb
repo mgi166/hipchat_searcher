@@ -1,4 +1,3 @@
-
 describe HipchatSearcher::Result do
   def result(response)
     described_class.new(response)
@@ -60,26 +59,23 @@ describe HipchatSearcher::Result do
     end
   end
 
-  describe '#rooms' do
-    context 'the value' do
-      subject { result(response).rooms }
+  describe '#continue?' do
+    context '#when items size less than 100' do
+      subject { result(response).continue? }
 
-      let(:response) { eval File.read(path) }
-      let(:path)     { File.join('spec', 'data', 'room-list.txt') }
+      let(:response) { File.read(path) }
+      let(:path) { File.join('spec', 'data', 'item-list.json') }
 
-      it { should be_instance_of Array }
+      it { should be_falsey }
     end
 
-    context 'the element' do
-      let(:rooms)    { result(response).rooms.first }
-      let(:response) { eval File.read(path) }
-      let(:path)     { File.join('spec', 'data', 'room-list.txt') }
+    context 'when items size equal 100' do
+      subject { result(response).continue? }
 
-      it { rooms.should be_instance_of ::Hashie::Mash }
+      let(:response) { File.read(path) }
+      let(:path) { File.join('spec', 'data', 'item-list-100.json') }
 
-      it 'should have keys "id", "links", "name"' do
-        rooms.keys.should == ['id', 'links', 'name']
-      end
+      it { should be_truthy }
     end
   end
 
@@ -140,6 +136,29 @@ describe HipchatSearcher::Result do
         it 'should return the value of "message"' do
           should == 'yareyare daze'
         end
+      end
+    end
+  end
+
+  describe '#rooms' do
+    context 'the value' do
+      subject { result(response).rooms }
+
+      let(:response) { eval File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'room-list.txt') }
+
+      it { should be_instance_of Array }
+    end
+
+    context 'the element' do
+      let(:rooms)    { result(response).rooms.first }
+      let(:response) { eval File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'room-list.txt') }
+
+      it { rooms.should be_instance_of ::Hashie::Mash }
+
+      it 'should have keys "id", "links", "name"' do
+        rooms.keys.should == ['id', 'links', 'name']
       end
     end
   end
