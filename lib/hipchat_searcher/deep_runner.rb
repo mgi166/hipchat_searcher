@@ -3,7 +3,7 @@ module HipchatSearcher
     def run
       result = @message.history(@room)
       i = 1
-      while result.continue?
+      while result.items.size == limit
         if i == 1
           i += 1
           search(result)
@@ -13,6 +13,10 @@ module HipchatSearcher
           search(result)
         end
       end
+    end
+
+    def limit
+      @options.date? ? 100 : 75
     end
   end
 end

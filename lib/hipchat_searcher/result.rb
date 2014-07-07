@@ -11,12 +11,12 @@ module HipchatSearcher
       valid!
     end
 
-    def continue?
-      items.size == 100
-    end
-
     def items
       @items ||= JSON.parse(@response)['items'].map {|i| ::Hashie::Mash.new(i) }
+    end
+
+    def oldest_date
+      items.first.date
     end
 
     def rooms
