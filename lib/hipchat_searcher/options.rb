@@ -40,7 +40,8 @@ module HipchatSearcher
       # [shortname, longname, description]
       def with_boolean
         [
-         ['a', 'archived', 'Include in the search of the room that have been archived']
+         ['a', 'archived', 'Include in the search of the room that have been archived'],
+         ['e', 'deep',     'Search older than comment of 100 or 75 recently']
         ]
       end
     end
