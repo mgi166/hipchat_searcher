@@ -59,26 +59,6 @@ describe HipchatSearcher::Result do
     end
   end
 
-  describe '#continue?' do
-    context '#when items size less than 100' do
-      subject { result(response).continue? }
-
-      let(:response) { File.read(path) }
-      let(:path) { File.join('spec', 'data', 'item-list.json') }
-
-      it { should be_falsey }
-    end
-
-    context 'when items size equal 100' do
-      subject { result(response).continue? }
-
-      let(:response) { File.read(path) }
-      let(:path) { File.join('spec', 'data', 'item-list-100.json') }
-
-      it { should be_truthy }
-    end
-  end
-
   describe '#items' do
     context 'the value' do
       subject { result(response).items }
@@ -137,6 +117,19 @@ describe HipchatSearcher::Result do
           should == 'yareyare daze'
         end
       end
+    end
+  end
+
+  describe '#oldest_date' do
+    subject { result(response).oldest_date }
+
+    let(:response) { File.read(path) }
+    let(:path)     { File.join('spec', 'data', 'item-list.json') }
+
+    it { should be_instance_of String }
+
+    it 'should return the oldest date in any items' do
+      should == "2014-05-30T01:38:16.741565+00:00"
     end
   end
 
