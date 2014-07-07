@@ -17,12 +17,16 @@ module HipchatSearcher
     end
 
     def search(result)
+      search_proxy.search(@pattern, result, @options.search_options)
+    end
+
+    private
+
+    def search_proxy
       if @options.grep_options?
-        proxy = SearchProxy.new('grep')
-        proxy.search(@pattern, result, @options.search_options)
+        SearchProxy.new('grep')
       else
-        proxy = SearchProxy.new('simple')
-        proxy.search(@pattern, result, @options.search_options)
+        SearchProxy.new('simple')
       end
     end
   end
