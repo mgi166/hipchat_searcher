@@ -13,6 +13,20 @@ module HipchatSearcher
     end
 
     def run
+      if @options.deep?
+        deep_run
+      else
+        simple_run
+      end
+    end
+
+    def deep_run
+      rooms.each do |room|
+        DeepRunner.run(@pattern, room, @options)
+      end
+    end
+
+    def simple_run
       rooms.each do |room|
         Runner.run(@pattern, room, @options)
       end
