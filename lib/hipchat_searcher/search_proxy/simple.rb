@@ -16,7 +16,7 @@ module HipchatSearcher
       end
 
       def items
-        @items ||= @result.items
+        @items ||= @result.items.reverse
       end
 
       def puts_search_result(item)
