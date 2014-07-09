@@ -57,11 +57,11 @@ describe HipchatSearcher::SearchProxy::Simple do
       end
       let(:search_result) do
         "\e[4;39;49mJoestars\e[0m" + "\n" + \
-        "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
-        "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" \
-        "\n" + \
         "  Date: 2014-06-09T11:29:10.209014+00:00" + "\n" + \
         "  @polnareff: a... arinomama ima okotta koto wo hanasu \e[0;31;49mze\e[0m" + "\n" + \
+        "\n" + \
+        "  Date: 2014-05-30T01:38:16.741565+00:00" + "\n" + \
+        "  @jotaro: yareyare da\e[0;31;49mze\e[0m" + "\n" \
         "\n"
       end
 
