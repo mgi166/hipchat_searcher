@@ -9,6 +9,7 @@ module HipchatSearcher
           search(result)
         else
           option = { date: result.oldest_date }
+          @options.date = result.oldest_date
           result = @message.history(@room, option)
           search(result)
         end
