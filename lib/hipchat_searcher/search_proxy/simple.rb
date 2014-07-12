@@ -30,7 +30,7 @@ module HipchatSearcher
       end
 
       def search
-        items.each_with_index do |item, idx|
+        items.each do |item|
           if @pattern =~ item.message
             ext = item.extend(HipchatSearcher::ItemExtention)
             ext.pattern = @pattern
