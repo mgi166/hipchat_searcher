@@ -30,6 +30,10 @@ module HipchatSearcher
 
       def before?(date)
         return false unless option_date? and date
+
+        opt_date    = Date.parse(@options[:date])
+        target_date = Date.parse(date)
+        opt_date < target_date
       end
 
       def puts_search_result(item)
