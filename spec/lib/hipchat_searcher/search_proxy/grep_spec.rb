@@ -315,4 +315,18 @@ describe HipchatSearcher::SearchProxy::Grep do
       end
     end
   end
+
+  describe '#before?' do
+    context 'when no "date" option' do
+      subject { searcher("hoge", double(:result)).before?("2014-07-13") }
+
+      it { should be_falsy }
+    end
+
+    context 'when argument is nil' do
+      subject { searcher("hoge", double(:result)).before?(nil) }
+
+      it { should be_falsy }
+    end
+  end
 end

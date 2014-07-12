@@ -1,4 +1,5 @@
 require 'colorize'
+require 'date'
 require 'forwardable'
 
 module HipchatSearcher
@@ -25,6 +26,10 @@ module HipchatSearcher
             i.pattern = pattern
           end
         end
+      end
+
+      def before?(date)
+        return false unless option_date? and date
       end
 
       def puts_search_result(item)
@@ -61,6 +66,10 @@ module HipchatSearcher
 
       def option_context?
         !!@options[:context]
+      end
+
+      def option_date?
+        !!@options[:date]
       end
 
       def printed?(id)
