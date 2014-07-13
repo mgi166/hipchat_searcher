@@ -14,7 +14,7 @@ module HipchatSearcher
         @print_item = {}
       end
 
-      def_delegators :@simple, :items, :option_user?, :pattern, :print_room?, :puts_room, :room
+      def_delegators :@simple, :before?, :items, :option_user?, :option_date?, :option_date, :pattern, :print_room?, :puts_room, :room
 
       def self.search(pattern, result, options)
         new(pattern, result, options).search
@@ -26,13 +26,6 @@ module HipchatSearcher
             i.pattern = pattern
           end
         end
-      end
-
-      def before?(date)
-        return false unless option_date? and date
-
-        target_date = Date.parse(date)
-        target_date < option_date
       end
 
       def puts_search_result(item)
@@ -74,14 +67,6 @@ module HipchatSearcher
 
       def option_context?
         !!@options[:context]
-      end
-
-      def option_date?
-        !!@options[:date]
-      end
-
-      def option_date
-        @option_date ||= Date.parse(@options[:date])
       end
 
       def printed?(id)

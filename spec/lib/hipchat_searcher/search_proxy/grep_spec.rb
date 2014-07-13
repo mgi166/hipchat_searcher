@@ -94,38 +94,6 @@ describe HipchatSearcher::SearchProxy::Grep do
     end
   end
 
-  describe '#before?' do
-    context 'when no "date" option' do
-      subject { searcher("hoge", double(:result)).before?("2014-07-13") }
-
-      it { should be_falsy }
-    end
-
-    context 'when argument is nil' do
-      subject { searcher("hoge", double(:result)).before?(nil) }
-
-      it { should be_falsy }
-    end
-
-    context 'when option date is later than argument date' do
-      subject { searcher("hoge", double(:result), date: "2014-07-13").before?("2014-07-10") }
-
-      it { should be_truthy }
-    end
-
-    context 'when option date is equal to argument date ' do
-      subject { searcher("hoge", double(:result), date: "2014-07-13").before?("2014-07-13") }
-
-      it { should be_falsy }
-    end
-
-    context 'when option date is newer than argument date ' do
-      subject { searcher("hoge", double(:result), date: "2014-07-13").before?("2014-07-20") }
-
-      it { should be_falsy }
-    end
-  end
-
   describe '#search' do
     context 'when search_option --before_context' do
       subject { searcher(pattern, result, before_context: '1').search }

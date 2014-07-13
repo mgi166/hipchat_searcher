@@ -15,6 +15,13 @@ module HipchatSearcher
         new(pattern, result, options).search
       end
 
+      def before?(date)
+        return false unless option_date? and date
+
+        target_date = Date.parse(date)
+        target_date < option_date
+      end
+
       def items
         @items ||= @result.items.reverse
       end
@@ -31,6 +38,11 @@ module HipchatSearcher
 
       def search
         items.each do |item|
+          if before?(item.date)
+            @options[:end] = true
+            break
+          end
+
           if @pattern =~ item.message
             ext = item.extend(HipchatSearcher::ItemExtention)
             ext.pattern = @pattern
@@ -45,6 +57,14 @@ module HipchatSearcher
 
       def option_user?
         !!@options[:user]
+      end
+
+      def option_date?
+        !!@options[:date]
+      end
+
+      def option_date
+        @option_date ||= Date.parse(@options[:date])
       end
 
       def print_room?

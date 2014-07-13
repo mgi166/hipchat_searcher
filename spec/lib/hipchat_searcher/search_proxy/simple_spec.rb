@@ -3,6 +3,38 @@ describe HipchatSearcher::SearchProxy::Simple do
     described_class.new(pattern, result, options)
   end
 
+  describe '#before?' do
+    context 'when no "date" option' do
+      subject { searcher("hoge", double(:result)).before?("2014-07-13") }
+
+      it { should be_falsy }
+    end
+
+    context 'when argument is nil' do
+      subject { searcher("hoge", double(:result)).before?(nil) }
+
+      it { should be_falsy }
+    end
+
+    context 'when option date is later than argument date' do
+      subject { searcher("hoge", double(:result), date: "2014-07-13").before?("2014-07-10") }
+
+      it { should be_truthy }
+    end
+
+    context 'when option date is equal to argument date ' do
+      subject { searcher("hoge", double(:result), date: "2014-07-13").before?("2014-07-13") }
+
+      it { should be_falsy }
+    end
+
+    context 'when option date is newer than argument date ' do
+      subject { searcher("hoge", double(:result), date: "2014-07-13").before?("2014-07-20") }
+
+      it { should be_falsy }
+    end
+  end
+
   describe '#items' do
     subject { searcher(pattern, result).items }
 
@@ -66,6 +98,31 @@ describe HipchatSearcher::SearchProxy::Simple do
       end
 
       it 'should print roomname & search result' do
+        expect do
+          subject
+        end.to output(search_result).to_stdout
+      end
+    end
+
+    context 'when you specify option date and include item date no later than this date' do
+      subject { searcher(pattern, result, date: '2014-06-10').search }
+
+      let(:pattern) { 'ze' }
+      let(:result) do
+        response = File.read(File.join('spec', 'data', 'item-list-with-overlap.json'))
+        HipchatSearcher::Result.new(response).tap do |r|
+          r.room = "Joestars"
+        end
+      end
+
+      let(:search_result) do
+        "\e[4;39;49mJoestars\e[0m" + "\n" + \
+        "  Date: 2014-06-11T19:20:47.726182+00:00" + "\n" + \
+        "  @lggy: inu zuki no kodomo ha migoroshiniha dekine-\e[0;31;49mze\e[0m" + "\n" + \
+        "\n"
+      end
+
+      it 'should print the matched message since option date' do
         expect do
           subject
         end.to output(search_result).to_stdout
@@ -205,5 +262,6 @@ describe HipchatSearcher::SearchProxy::Simple do
         end.to output(search_result).to_stdout
       end
     end
+
   end
 end
