@@ -1,20 +1,15 @@
 require 'colorize'
 require 'date'
-require 'forwardable'
 
 module HipchatSearcher
   class SearchProxy
-    class Grep
-      extend Forwardable
+    class Grep < Simple
 
       def initialize(pattern, result, options={})
-        @simple     = Simple.new(pattern, result, options)
-        @options    = options
+        super
         @print_room = false
         @print_item = {}
       end
-
-      def_delegators :@simple, :before?, :items, :option_user?, :option_date?, :option_date, :pattern, :print_room?, :puts_room, :room
 
       def self.search(pattern, result, options)
         new(pattern, result, options).search
