@@ -32,7 +32,7 @@ module HipchatSearcher
         return false unless option_date? and date
 
         target_date = Date.parse(date)
-        option_date < target_date
+        target_date < option_date
       end
 
       def puts_search_result(item)
@@ -47,6 +47,11 @@ module HipchatSearcher
 
       def search
         items.each_with_index do |item, idx|
+          if before?(item.date)
+            @options[:end] = true
+            break
+          end
+
           if pattern =~ item.message
             around_items(idx).each do |itm|
               puts_search_result(itm)
