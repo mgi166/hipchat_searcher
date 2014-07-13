@@ -4,6 +4,8 @@ module HipchatSearcher
       result = @message.history(@room)
       i = 1
       while result.items.size == limit
+        break if @options.end?
+
         if i == 1
           i += 1
           search(result)
