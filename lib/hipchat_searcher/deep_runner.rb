@@ -9,15 +9,15 @@ module HipchatSearcher
           search(result)
         else
           option = { date: result.oldest_date }
-          @options.date = result.oldest_date
           result = @message.history(@room, option)
+          @limit_flag = true
           search(result)
         end
       end
     end
 
     def limit
-      @options.date? ? 100 : 75
+      @limit_flag ? 100 : 75
     end
   end
 end

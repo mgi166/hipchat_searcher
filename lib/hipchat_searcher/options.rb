@@ -3,7 +3,7 @@ require 'hashie/mash'
 module HipchatSearcher
   class Options < Hashie::Mash
     def message_options
-      date? ? { date: date } : {}
+      {}
     end
 
     def room_options
@@ -16,6 +16,7 @@ module HipchatSearcher
         o.merge!(after_context:  after_context)  if after_context?
         o.merge!(before_context: before_context) if before_context?
         o.merge!(context: context)               if context?
+        o.merge!(date: date)                     if date?
       end
     end
 
