@@ -121,15 +121,26 @@ describe HipchatSearcher::Result do
   end
 
   describe '#oldest_date' do
-    subject { result(response).oldest_date }
+    context 'when items is not empty' do
+      subject { result(response).oldest_date }
 
-    let(:response) { File.read(path) }
-    let(:path)     { File.join('spec', 'data', 'item-list.json') }
+      let(:response) { File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'item-list.json') }
 
-    it { should be_instance_of String }
+      it { should be_instance_of String }
 
-    it 'should return the oldest date in any items' do
-      should == "2014-05-30T01:38:16.741565+00:00"
+      it 'should return the oldest date in any items' do
+        should == "2014-05-30T01:38:16.741565+00:00"
+      end
+    end
+
+    context 'when item is empty' do
+      subject { result(response).oldest_date }
+
+      let(:response) { File.read(path) }
+      let(:path)     { File.join('spec', 'data', 'item-list-empty.json') }
+
+      it { should be_nil }
     end
   end
 

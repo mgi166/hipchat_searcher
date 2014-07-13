@@ -1,0 +1,7 @@
+{
+    "items": [],
+    "links": {"self": "https://api.hipchat.com/v2/room/12345/history"},
+    "maxResults": 100,
+    "startIndex": 0
+}
+

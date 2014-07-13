@@ -16,7 +16,7 @@ module HipchatSearcher
     end
 
     def oldest_date
-      items.first.date
+      items.first.date rescue nil
     end
 
     def rooms
