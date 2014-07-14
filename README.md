@@ -24,6 +24,7 @@ echo {access_token} > ~/.hps
 
 `hipchat_searcher` search for a regular expression the words that you specify.  
 In the specifications of the [hipchat api](https://www.hipchat.com/docs/apiv2/), `hipchat_searcher` search of the upcoming 100 comments.
+If you want to search the log older 100 recently, specify `-e` or `--deep` option.
 
 * Search the words in all room. (but it searches ALL the room that user know, so there may be heavy)
 
@@ -35,6 +36,12 @@ hps word
 
 ```
 hps word -r room-name
+```
+
+* Search the words older than 75 recently
+
+```
+hps word -e
 ```
 
 * Search the words of trailing context after each match. Such as `grep` command option.
@@ -61,7 +68,7 @@ hps word -C 2
 hps word -u user-name
 ```
 
-* Search the words since target date
+* Search the words the date of latest from the target date
 
 ```
 hps word -d 2014-01-01
