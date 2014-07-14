@@ -1,3 +1,15 @@
+# 1.0.0
+### Feature
+* Newer search result is output to the upstream
+* Enable to search option `-e` named `deep-search`
+   * Specify this option, search the log older than 75 recently
+* Specify `date` option, also search the log with option `-e`
+   * The reason is that refer to the `Bugfix`
+* Refactor the code
+
+### Bugfix
+* Date option searches the date *until* you specify, Fix to search to the date of latest from you specified
+
 # 0.0.3
 ### Feature
 * Enable to search option `-A`, `-B`, `-C`, such as `grep`
