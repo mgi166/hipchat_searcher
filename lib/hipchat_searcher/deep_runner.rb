@@ -18,6 +18,8 @@ module HipchatSearcher
       end
     end
 
+    private
+
     def limit
       @limit_flag ? 100 : 75
     end
