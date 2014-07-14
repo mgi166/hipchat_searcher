@@ -23,4 +23,9 @@ end.to_hash
 options = HipchatSearcher::Options.new(hash)
 
 # run command
-HipchatSearcher::Command.run(ARGV.shift, options)
+begin
+  HipchatSearcher::Command.run(ARGV.shift, options)
+rescue Interrupt
+  $stderr.puts "HipchatSearcher execute interrupt, exit..."
+  exit 1
+end
