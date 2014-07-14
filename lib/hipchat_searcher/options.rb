@@ -2,6 +2,10 @@ require 'hashie/mash'
 
 module HipchatSearcher
   class Options < Hashie::Mash
+    def deep?
+      !!self['deep'] || !!self['date']
+    end
+
     def message_options
       {}
     end
@@ -31,7 +35,7 @@ module HipchatSearcher
         [
          ['r=', 'room=',           'Search only the log of the room that you specified'],
          ['u=', 'user=',           'Search only the log that specified user talk'],
-         ['d=', 'date=',           'Search the log since specified date'],
+         ['d=', 'date=',           'Search the log until the day of latest from the date you specified'],
          ['A=', 'after_context=',  'Search the log that trails context after each match'],
          ['B=', 'before_context=', 'Search the log that trails context before each match'],
          ['C=', 'context=',        'Search the log that trails context surround each match'],
@@ -42,7 +46,7 @@ module HipchatSearcher
       def with_boolean
         [
          ['a', 'archived', 'Include in the search of the room that have been archived'],
-         ['e', 'deep',     'Search older than comment of 100 or 75 recently']
+         ['e', 'deep',     'Search older than comment of 75 recently']
         ]
       end
     end
