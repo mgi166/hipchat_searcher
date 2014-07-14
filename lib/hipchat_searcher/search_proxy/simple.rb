@@ -19,7 +19,7 @@ module HipchatSearcher
         return false unless option_date? and date
 
         target_date = Date.parse(date)
-        target_date < option_date
+        parsed_date > target_date
       end
 
       def items
@@ -63,8 +63,8 @@ module HipchatSearcher
         !!@options[:date]
       end
 
-      def option_date
-        @option_date ||= Date.parse(@options[:date])
+      def parsed_date
+        @parsed_date ||= Date.parse(@options[:date])
       end
 
       def print_room?

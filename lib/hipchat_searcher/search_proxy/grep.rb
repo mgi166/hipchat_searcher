@@ -23,16 +23,6 @@ module HipchatSearcher
         end
       end
 
-      def puts_search_result(item)
-        if option_user?
-          if @options[:user] == item.mention_name
-            puts_contents(item)
-          end
-        else
-          puts_contents(item)
-        end
-      end
-
       def search
         items.each_with_index do |item, idx|
           if before?(item.date)
