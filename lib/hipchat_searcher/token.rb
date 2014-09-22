@@ -11,6 +11,8 @@ module HipchatSearcher
       @token = ENV['HPS_HIPCHAT_TOKEN']
     end
 
+    private
+
     def print_not_exist!
       puts <<-EOS
 `HPS_HIPCHAT_TOKEN` is not exsited.
