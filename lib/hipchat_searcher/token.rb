@@ -1,9 +1,9 @@
 module HipchatSearcher
-  class Config
+  class Token
     attr_reader :token
     def initialize
-      print_not_exist! unless File.exist?(config_path)
-      @token = File.read(config_path).chomp
+      print_not_exist! unless ENV['HPS_HIPCHAT_TOKEN']
+      @token = ENV['HPS_HIPCHAT_TOKEN']
     end
 
     def valid?
@@ -12,20 +12,16 @@ module HipchatSearcher
 
     def print_not_exist!
       puts <<-EOS
-Config file is not exsited.
+`HPS_HIPCHAT_TOKEN` is not exsited.
 
-* To create config file, run this command
-`echo {auth_token} > ~/.hps`
+* Set environment variable HPS_HIPCHAT_TOKEN
+`export HPS_HIPCHAT_TOKEN={auth_token}`
 
 * To get new auth_token, visit and sign in.
 https://www.hipchat.com/
       EOS
 
       exit 1
-    end
-
-    def config_path
-      File.expand_path(File.join('~', '.hps'))
     end
   end
 end
