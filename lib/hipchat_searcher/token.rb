@@ -1,13 +1,14 @@
 module HipchatSearcher
   class Token
     attr_reader :token
+
+    def self.token
+      new.token
+    end
+
     def initialize
       print_not_exist! unless ENV['HPS_HIPCHAT_TOKEN']
       @token = ENV['HPS_HIPCHAT_TOKEN']
-    end
-
-    def valid?
-      !!@token
     end
 
     def print_not_exist!
