@@ -3,9 +3,7 @@ module HipchatSearcher
     def initialize(pattern, options)
       @pattern = pattern
       @options = options
-      @options.config = Config.new
-
-      config_valid!
+      @options.token = Token.token
     end
 
     def self.run(pattern, options)
@@ -35,7 +33,7 @@ module HipchatSearcher
     private
 
     def all_room
-      Room.new(@options.config.token, @options.room_options).all_room
+      Room.new(@options.token, @options.room_options).all_room
     end
 
     def rooms

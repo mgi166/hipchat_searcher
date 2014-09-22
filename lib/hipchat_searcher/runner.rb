@@ -4,7 +4,7 @@ module HipchatSearcher
       @pattern = pattern
       @room    = room
       @options = options
-      @message = Message.new(@options.config.token, @options.message_options)
+      @message = Message.new(@options.token, @options.message_options)
     end
 
     def self.run(pattern, room, options)
