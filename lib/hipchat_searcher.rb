@@ -1,5 +1,5 @@
 require 'hipchat_searcher/command'
-require 'hipchat_searcher/config'
+require 'hipchat_searcher/token'
 require 'hipchat_searcher/item_extention'
 require 'hipchat_searcher/message'
 require 'hipchat_searcher/options'
