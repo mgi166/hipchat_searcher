@@ -17,7 +17,7 @@ You will be able to search hipchat log more easily.
 * If you get access token, execute command like this.
 
 ```
-echo {access_token} > ~/.hps
+export HPS_HIPCHAT_TOKEN={access_token}
 ```
 
 ## Usage
