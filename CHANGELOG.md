@@ -1,3 +1,7 @@
+# 1.0.1
+### Feature
+* Load environments variables `HPS_HIPCHAT_TOKEN` instead of the file `~/.hps`
+
 # 1.0.0
 ### Feature
 * Newer search result is output to the upstream
